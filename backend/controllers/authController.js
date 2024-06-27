@@ -23,7 +23,7 @@ const createAndSendToken = (user, statusCode, res) => {
 
   if (process.env.NODE_ENV == "production") cookieOptions.secure = true;
 
-  res.cookie("jwt", token, cookieOptions);
+  res.cookie("authUser", user, cookieOptions);
 
   user.password = undefined;
 
@@ -89,10 +89,11 @@ exports.protect = async (req, res, next) => {
       req.headers.authorization.startsWith("Bearer")
     )
       token = req.headers.authorization.split(" ")[1];
-
-    // console.log(token);
+    else if (req.cookies.authUser) token = req.cookies.authUser;
 
     if (!token)
+      // console.log(token);
+
       return next(new AppError("You are not Login .. Please Login in", 401));
 
     const decoded = await promisify(jwt.verify)(token, process.env.JWT_SECRET);
