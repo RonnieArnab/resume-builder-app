@@ -6,6 +6,8 @@ module.exports = {
     './components/**/*.{js,jsx}',
     './app/**/*.{js,jsx}',
     './src/**/*.{js,jsx}',
+    
+    'node_modules/flowbite-react/lib/esm/**/*.js'
   ],
   prefix: "",
   theme: {
@@ -71,7 +73,18 @@ module.exports = {
         "accordion-down": "accordion-down 0.2s ease-out",
         "accordion-up": "accordion-up 0.2s ease-out",
       },
+      backgroundImage: {
+        "hero-pattern": "url('/src/templates/arnab/assets/herobg.png')",
+      },
+      screens: {
+        xs: "450px",
+      },
     },
   },
-  plugins: [require("tailwindcss-animate")],
+  plugins: [
+    require("tailwindcss-animate"),
+    require("tailgrids/plugin"),
+    require('flowbite/plugin'),
+    require('daisyui'),
+  ]
 }

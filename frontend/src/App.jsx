@@ -1,14 +1,13 @@
 import { Outlet } from "react-router-dom";
 import "./App.css";
 import { Button } from "./components/ui/button";
-import Header from "./pages/Header";
+import Home from "./pages/Home/Home";
 function App() {
   return (
-    <div>
-      <Header />
-      <Outlet />
-    </div>
+    <Home />
   );
 }
 
 export default App;
+
+

@@ -1,0 +1,101 @@
+/* Hero.module.css */
+.a1b2c3 {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 20px;
+  text-align: center;
+  height: 100dvh;
+  min-height: 500px;
+}
+
+.a1b2c3 .d4e5f6 {
+  max-width: 200px;
+}
+
+.a1b2c3 .g7h8i9 {
+  display: flex;
+  gap: 25px;
+  justify-content: center;
+}
+
+.a1b2c3 .g7h8i9 a {
+  margin: 0;
+}
+
+.a1b2c3 .g7h8i9 a img {
+  width: 30px;
+}
+
+.a1b2c3 a {
+  width: fit-content;
+  align-self: center;
+}
+
+.a1b2c3 button {
+  background-color: var(--btn-color);
+  color: var(--btn-text-color);
+  border: none;
+  border-radius: 20px;
+  width: 126px;
+  height: 50px;
+  font-size: 20px;
+  font-weight: bold;
+  box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
+  transition: box-shadow 200ms ease-in-out, transform 200ms ease-in-out;
+}
+
+.a1b2c3 button:hover {
+  transform: scale(1.05);
+}
+
+.a1b2c3 button:active {
+  transform: translateY(2px);
+  box-shadow: 0 2px 2px rgba(0, 0, 0, 0.25);
+}
+
+.j0k1l2 {
+  position: relative !important;
+}
+
+.m3n4o5 {
+  position: absolute !important;
+  right: 0 !important;
+  width: 25px !important;
+  top: 0;
+}
+
+.m3n4o5:hover {
+  cursor: pointer;
+}
+
+.p6q7r8 {
+  max-width: 24ch;
+}
+
+.s9t0u1 {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+@media (min-width: 800px) {
+  .a1b2c3 {
+    flex-direction: row-reverse;
+    align-items: center;
+    justify-content: space-evenly;
+  }
+  .a1b2c3 .d4e5f6 {
+    max-width: 350px;
+    width: 350px;
+  }
+}
+
+@media (min-width: 1400px) {
+  .a1b2c3 .d4e5f6 {
+    max-width: 400px;
+    width: 400px;
+  }
+}
+
+
