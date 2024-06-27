@@ -13,10 +13,11 @@ import { Label } from "@/components/ui/label";
 import { Link } from "react-router-dom";
 import { Loader2 } from "lucide-react";
 import { useToast } from "@/components/ui/use-toast";
+import useSignup from "@/useHooks/useSignup";
 
 export function SignInPage() {
   const [signinDetails, setSigninDetails] = useState({
-    name: "",
+    username: "",
     email: "",
     password: "",
     passwordConfirm: "",
@@ -33,6 +34,8 @@ export function SignInPage() {
   });
 
   const { toast } = useToast();
+
+  const signup = useSignup();
 
   const handleInputChange = (e) => {
     const { id, value } = e.target;
@@ -68,15 +71,8 @@ export function SignInPage() {
     event.preventDefault();
     setIsLoading((prevState) => ({ ...prevState, signin: true }));
 
-    // Simulate Signin logic here
-    setTimeout(() => {
-      setIsLoading((prevState) => ({ ...prevState, signin: false }));
-      toast({
-        variant: "destructive",
-        title: "Uh oh! Something went wrong.",
-        description: "There was a problem with your request.",
-      });
-    }, 5000);
+    signup(signinDetails);
+    setIsLoading((prevState) => ({ ...prevState, signin: false }));
   };
 
   return (
@@ -115,11 +111,11 @@ export function SignInPage() {
             </div>
           </div>
           <div className="grid gap-2">
-            <Label htmlFor="name">Name</Label>
+            <Label htmlFor="name">Username</Label>
             <Input
-              id="name"
+              id="username"
               type="text"
-              value={signinDetails.name}
+              value={signinDetails.username}
               onChange={handleInputChange}
               placeholder="Your name"
             />

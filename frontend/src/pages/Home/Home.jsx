@@ -13,20 +13,20 @@ import DataValidationTemplate3 from '../DataValidationTemplate3/DataValidationTe
 
 function Home() {
   return (
-    // <>
-    //   <Hero />
-    //   <AboutUs />
-    //   <Features />
-    //   <Banner />
-    //   <Footer />
-    // </>
+    <>
+      <Hero />
+      <AboutUs />
+      <Features />
+      <Banner />
+      <Footer />
+    </>
 
     // <ResumeUpload />
 
     // <DataValidationArnab />
     // <Template3Home />
     // <Template4Home />
-    <DataValidationTemplate3 />
+    // <DataValidationTemplate3 />
   )
 }
 

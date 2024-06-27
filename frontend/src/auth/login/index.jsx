@@ -13,6 +13,7 @@ import { Label } from "@/components/ui/label";
 import { Switch } from "@/components/ui/switch";
 import { Link } from "react-router-dom";
 import { Loader2 } from "lucide-react";
+import useLogin from "@/useHooks/useLogin";
 
 export function Login() {
   const [loginDetails, setLoginDetails] = useState({
@@ -28,6 +29,8 @@ export function Login() {
   const [loginLoader, setLoginLoader] = useState(false);
   const [googleLoader, setGoogleLoader] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
+
+  const login = useLogin();
 
   const handleInputChange = (e) => {
     const { id, value } = e.target;
@@ -54,10 +57,9 @@ export function Login() {
     event.preventDefault();
     setLoginLoader(true);
 
-    // Simulate login logic here
-    setTimeout(() => {
-      setLoginLoader(false);
-    }, 5000);
+    login(loginDetails);
+
+    setLoginLoader(false);
   };
 
   return (
