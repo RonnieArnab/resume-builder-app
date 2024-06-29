@@ -1,15 +1,18 @@
 import React, { useState } from "react";
 import PersonalForm from "./forms/PersonalForm";
-import SummaryForm from "./forms/SummaryForm";
 import Experience from "./forms/Experience";
-import EducationForm from "./forms/EducationForm";
+import Education from "./forms/Education";
 import SkillForm from "./forms/SkillForm";
 import { Button } from "@/components/ui/button";
 import { ArrowLeft, ArrowRight, LayoutGrid } from "lucide-react";
+import Project from "./forms/Project";
+import { Navigate, useParams } from "react-router-dom";
 
 function FormSection() {
   const [activeFormIndex, setActiveFormIndex] = useState(1);
   const [enableNext, setEnableNext] = useState(false);
+  const params = useParams();
+
   return (
     <div>
       <div className="flex justify-between items-center">
@@ -46,7 +49,7 @@ function FormSection() {
           }}
         />
       ) : activeFormIndex == 2 ? (
-        <SummaryForm
+        <Education
           enableNext={(v) => {
             setEnableNext(v);
           }}
@@ -57,10 +60,17 @@ function FormSection() {
             setEnableNext(v);
           }}
         />
+      ) : activeFormIndex == 4 ? (
+        <Project
+          enableNext={(v) => {
+            setEnableNext(v);
+          }}
+        />
+      ) : activeFormIndex == 5 ? (
+        <SkillForm />
+      ) : activeFormIndex == 6 ? (
+        <Navigate to={"/dashboard/resume/" + params.resumeId + "/view"} />
       ) : null}
-
-      <EducationForm />
-      <SkillForm />
     </div>
   );
 }

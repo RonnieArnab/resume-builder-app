@@ -1,25 +1,23 @@
-import { Button } from "@/components/ui/button";
+import { ResumeInfoContext } from "@/context/ResumeInfoContext";
 import { Input } from "@/components/ui/input";
 import React, { useContext, useEffect, useState } from "react";
+import { Button } from "@/components/ui/button";
 import RichTextEditor from "../RichTextEditor";
-import { ResumeInfoContext } from "@/context/ResumeInfoContext";
-import { useParams } from "react-router-dom";
-import useGetResume from "@/useHooks/useResume";
 import { toast } from "@/components/ui/use-toast";
+import useGetResume from "@/useHooks/useResume";
+import { useParams } from "react-router-dom";
 import { Loader2 } from "lucide-react";
 
 const initialFormDetails = {
-  title: "",
-  companyName: "",
-  city: "",
-  state: "",
+  universityName: "",
+  degree: "",
+  major: "",
   startDate: "",
   endDate: "",
-  workSummary: "",
+  description: "",
 };
-
-function Experience({ enableNext }) {
-  const [experienceList, setExperienceList] = useState([]);
+function Education({ enableNext }) {
+  const [educationList, setEducationList] = useState([]);
   const { resumeInfo, setResumeInfo } = useContext(ResumeInfoContext);
   const [isLoading, setLoading] = useState(false);
   const { updateResume } = useGetResume();
@@ -44,116 +42,108 @@ function Experience({ enableNext }) {
   };
 
   useEffect(() => {
-    resumeInfo?.experience.length > 0 &&
-      setExperienceList(resumeInfo?.experience);
+    resumeInfo?.education.length > 0 && setEducationList(resumeInfo.education);
   }, []);
 
   const handleChange = (event, index) => {
     const { name, value } = event.target;
-    const newExperienceList = [...experienceList];
-    newExperienceList[index][name] = value;
-    setExperienceList(newExperienceList);
+    const newEducationList = [...educationList];
+    newEducationList[index][name] = value;
+    setEducationList(newEducationList);
+  };
+
+  const AddNewEducation = () => {
+    setEducationList([...educationList, initialFormDetails]);
+  };
+
+  const RemoveEducation = () => {
+    setEducationList(educationList.slice(0, -1));
   };
 
   const handleRichTextEditor = (event, name, index) => {
-    const newExperienceList = [...experienceList];
-    newExperienceList[index][name] = event.target.value;
-    setExperienceList(newExperienceList);
-  };
-
-  const addNewExperience = () => {
-    setExperienceList([...experienceList, initialFormDetails]);
-  };
-
-  const removeExperience = () => {
-    if (experienceList.length > 1) {
-      setExperienceList(experienceList.slice(0, -1));
-    }
+    const newEducationList = [...educationList];
+    newEducationList[index][name] = event.target.value;
+    setEducationList(newEducationList);
   };
 
   useEffect(() => {
-    setResumeInfo((prevResumeInfo) => ({
-      ...prevResumeInfo,
-      experience: experienceList,
-    }));
-  }, [experienceList, setResumeInfo]);
-
+    setResumeInfo({
+      ...resumeInfo,
+      education: educationList,
+    });
+  }, [educationList]);
   return (
     <div className="p-5 shadow-lg rounded-lg border-t-primary border-t-4 mt-10">
-      <h2 className="font-bold text-lg">Experience</h2>
-      <p>Add your previous experience</p>
+      <h2 className="font-bold text-lg">Education</h2>
+      <p>Add your eduaction details</p>
       <form onSubmit={onSave}>
-        <div>
-          {experienceList.map((experience, index) => (
+        <div className="">
+          {educationList.map((education, index) => (
             <div
-              key={index}
-              className="grid grid-cols-2 gap-3 my-5 p-3 border rounded-lg">
-              <div>
-                <label className="text-xs">Position Title</label>
+              className="grid grid-cols-2 gap-3 my-5 p-3 border rounded-lg"
+              key={index}>
+              <div className="col-span-2">
+                <label className=" text-xs ">University Name</label>
                 <Input
                   type="text"
-                  name="title"
-                  value={experience.title}
+                  name="universityName"
+                  defaultValue={education.universityName}
+                  value={education.universityName}
+                  onChange={(event) => handleChange(event, index)}
+                  className=" w-full p-2 border rounded"
+                />
+              </div>
+              <div className="">
+                <label className=" text-xs ">Degree</label>
+                <Input
+                  type="text"
+                  name="degree"
+                  defaultValue={education.degree}
+                  value={education.degree}
                   onChange={(event) => handleChange(event, index)}
                   className="w-full p-2 border rounded"
                 />
               </div>
-              <div>
-                <label className="text-xs">Company Name</label>
+              <div className="">
+                <label className=" text-xs ">Major</label>
                 <Input
                   type="text"
-                  name="companyName"
-                  value={experience.companyName}
+                  name="major"
+                  defaultValue={education.major}
+                  value={education.major}
                   onChange={(event) => handleChange(event, index)}
                   className="w-full p-2 border rounded"
                 />
               </div>
-              <div>
-                <label className="text-xs">City</label>
+              <div className="">
+                <label className=" text-xs ">End State</label>
                 <Input
-                  type="text"
-                  name="city"
-                  value={experience.city}
+                  type="date"
+                  name="endState"
+                  defaultValue={education.endDate}
+                  value={education.endDate}
                   onChange={(event) => handleChange(event, index)}
                   className="w-full p-2 border rounded"
                 />
               </div>
-              <div>
-                <label className="text-xs">State</label>
-                <Input
-                  type="text"
-                  name="state"
-                  value={experience.state}
-                  onChange={(event) => handleChange(event, index)}
-                  className="w-full p-2 border rounded"
-                />
-              </div>
-              <div>
-                <label className="text-xs">Start Date</label>
+              <div className="">
+                <label className=" text-xs ">Start Date</label>
                 <Input
                   type="date"
                   name="startDate"
-                  value={experience.startDate}
-                  onChange={(event) => handleChange(event, index)}
-                  className="w-full p-2 border rounded"
-                />
-              </div>
-              <div>
-                <label className="text-xs">End Date</label>
-                <Input
-                  type="date"
-                  name="endDate"
-                  value={experience.endDate}
+                  defaultValue={education.startDate}
+                  value={education.startDate}
                   onChange={(event) => handleChange(event, index)}
                   className="w-full p-2 border rounded"
                 />
               </div>
               <div className="col-span-2">
+                <label className=" text-xs ">Description</label>
                 <RichTextEditor
                   index={index}
-                  defaultValue={experience.workSummary}
+                  defaultValue={education.description}
                   onRichTextEditorChange={(event) =>
-                    handleRichTextEditor(event, "workSummary", index)
+                    handleRichTextEditor(event, "description", index)
                   }
                 />
               </div>
@@ -165,16 +155,17 @@ function Experience({ enableNext }) {
             <Button
               variant="outline"
               className="text-primary"
-              onClick={addNewExperience}>
+              onClick={AddNewEducation}>
               + Add More Experience
             </Button>
             <Button
               variant="outline"
               className="text-primary"
-              onClick={removeExperience}>
+              onClick={RemoveEducation}>
               - Remove
             </Button>
           </div>
+
           <Button type="submit" disabled={isLoading}>
             {isLoading ? <Loader2 className="animate-spin" /> : "Save"}
           </Button>
@@ -184,4 +175,4 @@ function Experience({ enableNext }) {
   );
 }
 
-export default Experience;
+export default Education;

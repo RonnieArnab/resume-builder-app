@@ -13,8 +13,9 @@ import {
   Separator,
 } from "react-simple-wysiwyg";
 
-function RichTextEditor({ onRichTextEditor }) {
-  const [value, setValue] = useState();
+function RichTextEditor({ onRichTextEditorChange, index, defaultValue }) {
+  const [value, setValue] = useState(defaultValue);
+  console.log(value);
 
   return (
     <div>
@@ -23,7 +24,7 @@ function RichTextEditor({ onRichTextEditor }) {
           value={value}
           onChange={(e) => {
             setValue(e.target.value);
-            onRichTextEditor(e);
+            onRichTextEditorChange(e);
           }}>
           <Toolbar>
             <Separator />

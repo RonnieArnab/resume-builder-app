@@ -1,23 +1,19 @@
 import { ResumeInfoContext } from "@/context/ResumeInfoContext";
 import React, { useContext } from "react";
 import PersonalDetailPreview from "./preview/PersonalDetailPreview";
-import SummaryPreview from "./preview/SummaryPreview";
 import ExperiencePreview from "./preview/ExperiencePreview";
 import EducationPreview from "./preview/EducationPreview";
 import SkillsPreview from "./preview/SkillsPreview";
+import ProjectePreview from "./preview/ProjectPreview";
 
 const ResumePreview = () => {
   const { resumeInfo, setResumeInfo } = useContext(ResumeInfoContext);
   return (
-    <div
-      className="shadow-md h-full p-14 border-t-[20px]"
-      style={{
-        borderColor: resumeInfo.themeColor,
-      }}>
+    <div className="p-2">
       <PersonalDetailPreview resumeInfo={resumeInfo} />
-      <SummaryPreview resumeInfo={resumeInfo} />
-      <ExperiencePreview resumeInfo={resumeInfo} />
       <EducationPreview resumeInfo={resumeInfo} />
+      <ExperiencePreview resumeInfo={resumeInfo} />
+      <ProjectePreview resumeInfo={resumeInfo} />
       <SkillsPreview resumeInfo={resumeInfo} />
     </div>
   );

@@ -2,13 +2,17 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { toast } from "@/components/ui/use-toast";
 import { ResumeInfoContext } from "@/context/ResumeInfoContext";
+import useGetResume from "@/useHooks/useResume";
 import { Loader2 } from "lucide-react";
 import React, { useContext, useState } from "react";
+import { useParams } from "react-router-dom";
 
 function PersonalForm({ enableNext }) {
+  const params = useParams();
   const { resumeInfo, setResumeInfo } = useContext(ResumeInfoContext);
   const [isLoading, setLoading] = useState(false);
   const [formData, setFormData] = useState();
+  const { updateResume } = useGetResume();
 
   const handleInputChange = (e) => {
     enableNext(false);
@@ -27,18 +31,22 @@ function PersonalForm({ enableNext }) {
 
   console.log(resumeInfo);
 
-  const onSave = (e) => {
+  const onSave = async (e) => {
     setLoading(true);
     e.preventDefault();
+    try {
+      const updatedResume = await updateResume(params.resumeId, resumeInfo);
+      console.log("updatedResume", updatedResume);
+    } catch (err) {
+      console.log(err);
+    }
 
-    setTimeout(() => {
-      setLoading(false);
-      toast({
-        title: "Details Updated",
-        description: "Personal Deatils Updated",
-      });
-      enableNext(true);
-    }, 3000);
+    setLoading(false);
+    toast({
+      title: "Details Updated",
+      description: "Personal Deatils Updated",
+    });
+    enableNext(true);
   };
 
   return (
@@ -65,21 +73,22 @@ function PersonalForm({ enableNext }) {
               onChange={handleInputChange}
             />
           </div>
-          <div className="col-span-2">
-            <label className="text-sm">Job Title</label>
+
+          <div className="">
+            <label className="text-sm">Github</label>
             <Input
-              name="jobTitle"
+              name="githubLink"
               required
-              defaultValue={resumeInfo.jobTitle}
+              defaultValue={resumeInfo.githubLink}
               onChange={handleInputChange}
             />
           </div>
-          <div className="col-span-2">
-            <label className="text-sm">Address</label>
+          <div className="">
+            <label className="text-sm">Linked</label>
             <Input
-              name="address"
+              name="LinkedinLink"
               required
-              defaultValue={resumeInfo.address}
+              defaultValue={resumeInfo.LinkedinLink}
               onChange={handleInputChange}
             />
           </div>

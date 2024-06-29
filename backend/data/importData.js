@@ -1,4 +1,16 @@
-export default {
+const dotenv = require("dotenv");
+const mongoose = require("mongoose");
+dotenv.config({ path: "../.env" });
+
+const DB = process.env.DATABASE_URL.replace("<PASSWORD>", process.env.PASSWORD);
+
+mongoose.connect(DB).then((con) => {
+  console.log("Connections done ...");
+});
+
+const { Resume } = require("../models/resumeModel");
+
+let profileData = {
   firstName: "James",
   lastName: "Carter",
   jobTitle: "full stack developer",
@@ -20,12 +32,7 @@ export default {
       endDate: "",
       currentlyWorking: true,
       workSummery:
-        " Designed, developed, and maintained full-stack applications using React and Node.js.\n" +
-        "• Implemented responsive user interfaces with React, ensuring seamless user experiences across\n" +
-        "various devices and browsers.\n" +
-        "• Maintaining the React Native in-house organization application." +
-        "• CreatedRESTfulAPIs withNode.js and Express,facilitating data communicationbetween the front-end" +
-        "and back-end systems.",
+        "Designed, developed, and maintained full-stack applications using React and Node.js. Implemented responsive user interfaces with React, ensuring seamless user experiences across various devices and browsers. Maintaining the React Native in-house organization application. Created RESTful APIs with Node.js and Express, facilitating data communication between the front-end and back-end systems.",
     },
     {
       id: 2,
@@ -37,12 +44,7 @@ export default {
       endDate: "Jan 2021",
       currentlyWorking: false,
       workSummery:
-        " Designed, developed, and maintained full-stack applications using React and Node.js." +
-        "• Implemented responsive user interfaces with React, ensuring seamless user experiences across" +
-        "various devices and browsers." +
-        "• Maintaining the React Native in-house organization application." +
-        "• CreatedRESTfulAPIs withNode.js and Express,facilitating data communicationbetween the front-end" +
-        "and back-end systems.",
+        "Designed, developed, and maintained full-stack applications using React and Node.js. Implemented responsive user interfaces with React, ensuring seamless user experiences across various devices and browsers. Maintaining the React Native in-house organization application. Created RESTful APIs with Node.js and Express, facilitating data communication between the front-end and back-end systems.",
     },
   ],
   education: [
@@ -80,7 +82,6 @@ export default {
     developerTools: ["Git", "PostMan"],
     libraries: ["pandas", "NumPy", "Matplotlib", "TensorFlow API"],
   },
-
   project: [
     {
       projectName: "Online Payment Fraud Detection",
@@ -98,3 +99,15 @@ export default {
     },
   ],
 };
+
+const importData = async () => {
+  try {
+    await Resume.create(profileData);
+
+    console.log("Data have been added");
+  } catch (err) {
+    console.log(err);
+  }
+};
+
+if (process.argv[2] == "--import") importData();

@@ -2,12 +2,31 @@
 @tailwind components;
 @tailwind utilities;
 
-.rsw-ce ul {
+@media print {
+  #no-print {
+    display: none;
+  }
+
+  #print-area {
+    display: block;
+  }
+
+  body {
+    margin: 0;
+    padding: 0;
+    box-shadow: 0;
+  }
+}
+
+@page {
+  size: auto;
+  margin: 0mm;
+}
+ul {
   list-style: disc;
   padding-left: 2em;
 }
-
-.rsw-ce ol {
+ol {
   list-style: decimal;
   padding-left: 2em;
 }

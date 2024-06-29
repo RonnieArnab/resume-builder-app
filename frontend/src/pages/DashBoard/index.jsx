@@ -1,8 +1,12 @@
 import React, { useState } from "react";
 import AddResume from "./components/AddResume";
 import ResumeCardItem from "./components/ResumeCardItem";
+import { useCookies } from "react-cookie";
 
 function DashBoard() {
+  const cookies = useCookies(["authUser"]);
+
+  console.log(cookies[0].authUser.data.user._id);
   const [resumeList, setResumeList] = useState([{ title: "Resume title" }]);
   return (
     <div className="p-10 md:px-20 lg:px-32">

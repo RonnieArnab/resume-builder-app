@@ -7,7 +7,9 @@ const Header = () => {
   const { authUser } = useAuthContext();
 
   return (
-    <div className="px-5 p-3 shadow-md flex  flex-row justify-between">
+    <div
+      id="no-print"
+      className="px-5 p-3 shadow-md flex  flex-row justify-between">
       <img src="./../../../public/vite.svg" alt="" />
 
       <div className="flex flex-row gap-4">
