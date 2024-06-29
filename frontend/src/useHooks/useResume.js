@@ -3,13 +3,16 @@ import { useAuthContext } from "@/context/AuthContext";
 
 const useGetResume = () => {
   const { authUser } = useAuthContext();
-  const { data } = authUser;
+  const { data, token } = authUser;
   const _id = data.user._id;
 
   const fetchResumebyResumeId = async (resumeId) => {
     try {
       const config = {
-        headers: { "Content-Type": "application/json" },
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
       };
 
       const response = await axios.get(`/resume/${resumeId}/resumeId`, config);
@@ -28,6 +31,7 @@ const useGetResume = () => {
       const response = await axios.patch(`resume/${resumeId}/update`, data, {
         headers: {
           "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
         },
       });
       return response.data;
@@ -46,6 +50,7 @@ const useGetResume = () => {
       const response = await axios.post(`resume/`, data, {
         headers: {
           "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
         },
       });
       return response.data;

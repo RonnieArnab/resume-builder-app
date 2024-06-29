@@ -4,16 +4,20 @@ import { useParams } from "react-router-dom";
 
 const useFetchResume = () => {
   const { authUser } = useAuthContext();
-  const { data } = authUser;
+  const { data, token } = authUser;
   const _id = data.user._id;
 
   const fetchResumeList = async () => {
     try {
       const config = {
-        headers: { "Content-Type": "application/json" },
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
       };
 
       const response = await axios.get(`/resume/${_id}/userId`, config);
+
       return response.data;
     } catch (error) {
       console.error("Error:", error.message);

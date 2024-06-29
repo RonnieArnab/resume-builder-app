@@ -45,7 +45,7 @@ function DashBoard() {
       </div>
       <div className="sm:w-4/5 w-full p-2 mx-auto mb-20">
         <div className="mb-4 border-b border-gray-200 dark:border-gray-700">
-          <ul class="flex flex-wrap -mb-px text-sm font-medium text-center">
+          <ul class="flex flex-wrap -mb-px text-sm font-medium text-center list-none">
             <li
               class="me-2 text-purple-600 hover:text-purple-600 dark:text-purple-500 dark:hover:text-purple-500 border-purple-600 dark:border-purple-500"
               role="presentation">

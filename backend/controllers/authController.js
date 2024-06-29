@@ -4,6 +4,8 @@ const User = require("./../models/userModel");
 const jwt = require("jsonwebtoken");
 const sendMail = require("../utils/email");
 const crypto = require("crypto");
+const { jwtDecode } = require("jwt-decode")
+
 
 const signToken = (id) => {
   return jwt.sign({ id: id }, process.env.JWT_SECRET, {
@@ -53,6 +55,40 @@ exports.signup = async (req, res) => {
   }
 };
 
+exports.googleOauth = async (req, res) => {
+  try {
+    const { credential_jwt } = req.body
+    const decoded = jwtDecode(credential_jwt);
+
+    const { email } = decoded;
+    const userExists = await User.findOne({ email });
+    if (userExists) {
+      if (userExists.oauth) {
+        createAndSendToken(userExists, 201, res);
+      }
+      else {
+        return res
+          .status(500)
+          .json({ status: "fail", message: "This Email already exists try loggin in using password" });
+      }
+    }
+    else {
+      const user = await User.create({
+        username: decoded.name,
+        email: decoded.email,
+        oauth: true,
+        password: "cfszczxasas",
+        passwordConfirm: "cfszczxasas",
+      });
+      createAndSendToken(user, 201, res);
+    }
+  } catch (err) {
+    return res
+      .status(500)
+      .json({ status: "fail", message: "Failed to create user" });
+  }
+};
+
 exports.login = async (req, res, next) => {
   try {
     const { email, password } = req.body;
@@ -92,23 +128,28 @@ exports.protect = async (req, res, next) => {
     else if (req.cookies.authUser) token = req.cookies.authUser;
 
     if (!token)
-      // console.log(token);
-
-      return next(new AppError("You are not Login .. Please Login in", 401));
+      res.status(401).json({
+        status: "fail",
+        message: `Not Authorized to access this endpoint`,
+      });
 
     const decoded = await promisify(jwt.verify)(token, process.env.JWT_SECRET);
-
-    // console.log(decoded);
 
     const freshUser = await User.findById(decoded.id);
 
     if (!freshUser)
-      return next(new AppError("The user not found with this token", 401));
+      res.status(401).json({
+        status: "fail",
+        message: `The token provided is Invalid`,
+      });
 
     const isPasswordChanged = await freshUser.changesPasswordAfter(decoded.iat);
 
     if (isPasswordChanged) {
-      return next(new AppError("User has recently changed the password", 401));
+      res.status(401).json({
+        status: "fail",
+        message: `User has recently changed the password. Try logging in again`,
+      });
     }
 
     req.user = freshUser;

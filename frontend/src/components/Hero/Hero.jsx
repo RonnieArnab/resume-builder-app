@@ -8,8 +8,7 @@ const Hero = () => {
   const navigate = useNavigate();
 
   const handlePortfolioBtn = () => {
-    if(authUser) navigate('/portfolio/create')
-    else navigate("/auth/sign-in")
+    navigate('/portfolio/create')
   }
 
   return (
