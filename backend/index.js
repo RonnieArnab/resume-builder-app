@@ -8,6 +8,9 @@ const mongoSanitize = require("express-mongo-sanitize");
 const cookieParser = require("cookie-parser");
 const app = express();
 
+const portfolioRouter = require("./routes/portfolioRouter");
+
+
 app.use(cors());
 app.use(helmet());
 app.use(mongoSanitize());
@@ -23,5 +26,6 @@ app.use((req, res, next) => {
 
 app.use("/users", userRouter);
 app.use("/resume", resumeRouter);
+app.use("/portfolio", portfolioRouter);
 
 module.exports = app;

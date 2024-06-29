@@ -2,21 +2,26 @@
 import "./App.css";
 import Header from "./pages/Header";
 import { Routes, Route, Navigate } from "react-router-dom";
-import Home from "./pages/Home";
+import Home from "./pages/Home/Home";
 import SignInPage from "./auth/sign-in";
 import Login from "./auth/login";
-import DashBoard from "./pages/dashboard";
+import DashBoard from "../src/pages/dashboard";
 import { useAuthContext } from "./context/AuthContext";
 import EditResume from "./pages/dashboard/resume/[resumeId]/edit";
 import { Toaster } from "./components/ui/toaster";
 import ViewResume from "./pages/dashboard/resume/[resumeId]/view";
+import Navbar from "./components/NavBar/NavBar";
+import ResumeUpload from "./pages/ResumeUpload/ResumeUpload";
+import ValidateParsedData from "./pages/ValidateParsedData/ValidateParsedData";
+import PortfolioDisplay from "./pages/PortfolioDisplay/PortfolioDisplay";
+import PageNotFound from "./pages/PageNotFound/PageNotFound";
 
 function App() {
   const { authUser } = useAuthContext();
 
   return (
     <div>
-      <Header />
+      {/* <Navbar /> */}
       <Routes>
         <Route path="/" element={<Home />} />
         <Route
@@ -29,6 +34,22 @@ function App() {
           element={authUser ? <Navigate to="/dashboard" /> : <Login />}
         />
         <Route
+          path="/portfolio/create"
+          element={authUser ? <ResumeUpload /> : <Login />}
+        />
+        <Route
+          path="/portfolio/validate"
+          element={
+            authUser ? <ValidateParsedData reqType={"validate"} /> : <Login />
+          }
+        />
+        <Route
+          path="/dashboard/edit/:portfolioId"
+          element={
+            authUser ? <ValidateParsedData reqType={"edit"} /> : <Login />
+          }
+        />
+        <Route
           path="/dashboard/resume/:resumeId/edit"
           element={<EditResume />}
         />
@@ -37,6 +58,11 @@ function App() {
           element={<ViewResume />}
         />
         {/* // element={authUser ? <DashBoard /> : <Navigate to="/auth/login" />} */}
+        <Route
+          path="/:portfolioId"
+          element={authUser ? <PortfolioDisplay /> : <Login />}
+        />
+        <Route path="*" element={<PageNotFound />} />
       </Routes>
       <Toaster />
     </div>
