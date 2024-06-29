@@ -3,13 +3,16 @@ import axios from "../api/axios";
 
 const useCreatePortfolio = () => {
     const {authUser} = useAuthContext()
-    const {data } = authUser
+    const {data,token } = authUser
     const _id = data.user._id
 
     const createPortfolio = async (portfolioDetails) => {
         try {
             const config = {
-                headers: { "Content-Type": "application/json" },
+                headers: { 
+                    "Content-Type": "application/json",
+                    "Authorization" : `Bearer ${token}`
+                },
               };
               portfolioDetails["userId"] = _id
 

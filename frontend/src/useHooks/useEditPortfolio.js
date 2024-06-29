@@ -2,10 +2,15 @@ import { useAuthContext } from "@/context/AuthContext";
 import axios from "../api/axios";
 
 const useEditPortfolio = () => {
+    const {authUser} = useAuthContext()
+    const {token } = authUser
     const updatePortfolio = async (portfolioDetails) => {
         try {
             const config = {
-                headers: { "Content-Type": "application/json" },
+                headers: { 
+                    "Content-Type": "application/json",
+                    "Authorization" : `Bearer ${token}`
+                },
               };
 
             const response = await axios.post("/portfolio/update", JSON.stringify(portfolioDetails), config);

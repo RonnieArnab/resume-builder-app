@@ -14,6 +14,10 @@ import { Switch } from "@/components/ui/switch";
 import { Link } from "react-router-dom";
 import { Loader2 } from "lucide-react";
 import useLogin from "@/useHooks/useLogin";
+import { GoogleLogin } from '@react-oauth/google';
+import useGoogleOauth from "@/useHooks/useGoogleOauth";
+
+
 
 export function Login() {
   const [loginDetails, setLoginDetails] = useState({
@@ -31,6 +35,7 @@ export function Login() {
   const [showPassword, setShowPassword] = useState(false);
 
   const login = useLogin();
+  const googleSignIn = useGoogleOauth()
 
   const handleInputChange = (e) => {
     const { id, value } = e.target;
@@ -44,20 +49,27 @@ export function Login() {
     setShowPassword((prevState) => !prevState);
   };
 
-  const handleGoogleLogin = (event) => {
-    event.preventDefault();
-    setGoogleLoader(true);
-
-    setTimeout(() => {
-      setGoogleLoader(false);
-    }, 5000);
+  const handleGoogleLoginSuccess = async(response) => {
+    try{
+      setGoogleLoader(true);
+      await googleSignIn({credential_jwt : response.credential})
+    }
+    catch(e){
+    }
+    finally{
+      setGoogleLoader(false)
+    }
   };
 
-  const handleLogin = (event) => {
+  const handleGoogleLoginError = (error) => {
+    console.log(error)
+  };
+
+  const handleLogin = async (event) => {
     event.preventDefault();
     setLoginLoader(true);
 
-    login(loginDetails);
+    const response = await login(loginDetails);
 
     setLoginLoader(false);
   };
@@ -72,20 +84,16 @@ export function Login() {
           </CardDescription>
         </CardHeader>
         <CardContent className="grid gap-4">
-          <div className="grid grid-cols-1">
-            <Button
-              className="w-full mb-3"
-              onClick={handleGoogleLogin}
-              disabled={googleLoader}>
-              {googleLoader ? (
-                <>
-                  <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                  Please Wait
-                </>
-              ) : (
-                "Google"
-              )}
-            </Button>
+          <div className="flex justify-center">
+            {googleLoader ? (
+              <Button
+                className="w-full mb-3"
+                disabled={googleLoader}>
+                <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                Please Wait
+              </Button>
+            ) : <GoogleLogin onSuccess={handleGoogleLoginSuccess} onError={handleGoogleLoginError} />}
+
           </div>
           <div className="relative">
             <div className="absolute inset-0 flex items-center">

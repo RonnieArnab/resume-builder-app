@@ -1,6 +1,9 @@
+import { useAuthContext } from "@/context/AuthContext";
 import axios from "axios";
 
 const useGetResume = () => {
+  const { authUser } = useAuthContext()
+  const { token } = authUser
   const fetchResume = async (resumeId) => {
     console.log(resumeId);
     try {
@@ -9,6 +12,7 @@ const useGetResume = () => {
         {
           headers: {
             "Content-Type": "application/json",
+            "Authorization": `Bearer ${token}`
           },
         }
       );
@@ -26,6 +30,7 @@ const useGetResume = () => {
         {
           headers: {
             "Content-Type": "application/json",
+            "Authorization": `Bearer ${token}`
           },
         }
       );

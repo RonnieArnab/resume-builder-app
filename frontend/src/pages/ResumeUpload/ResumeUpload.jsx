@@ -7,22 +7,22 @@ import { useNavigate } from 'react-router-dom';
 const templates = [
     {
         value: "joyal",
-        imageSrc: "/images/sample_preview.png",
+        imageSrc: "/images/joyal.png",
         previewLink: "#"
     },
     {
         value: "arnab",
-        imageSrc: "/images/sample_preview.png",
+        imageSrc: "/images/arnab.png",
         previewLink: "#"
     },
     {
         value: "template3",
-        imageSrc: "/images/sample_preview.png",
+        imageSrc: "/images/template3.png",
         previewLink: "#"
     },
     {
         value: "template4",
-        imageSrc: "/images/sample_preview.png",
+        imageSrc: "/images/template4.png",
         previewLink: "#"
     }
 ]
@@ -83,7 +83,7 @@ function ResumeUpload() {
     return (
         <div>
             <Navbar />
-            <div className="w-full mt-32 flex flex-col align-items-center">
+            <div className="w-full mt-32 h-screen flex flex-col align-items-center">
                 <div class="w-3/4 sm:w-2/4 py-9 bg-gray-50 rounded-2xl border border-gray-300 gap-3 grid border-dashed">
                     <div class="grid gap-1">
                         <svg class="mx-auto" width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">

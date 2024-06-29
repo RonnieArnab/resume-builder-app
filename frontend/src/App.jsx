@@ -20,50 +20,42 @@ function App() {
   const { authUser } = useAuthContext();
 
   return (
-    <div>
-      {/* <Navbar /> */}
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route
-          path="/auth/sign-in"
-          element={authUser ? <Navigate to="/dashboard" /> : <SignInPage />}
-        />
-        <Route path="/dashboard" element={<DashBoard />} />
-        <Route
-          path="/auth/login"
-          element={authUser ? <Navigate to="/dashboard" /> : <Login />}
-        />
-        <Route
-          path="/portfolio/create"
-          element={authUser ? <ResumeUpload /> : <Login />}
-        />
-        <Route
-          path="/portfolio/validate"
-          element={
-            authUser ? <ValidateParsedData reqType={"validate"} /> : <Login />
-          }
-        />
-        <Route
-          path="/dashboard/edit/:portfolioId"
-          element={
-            authUser ? <ValidateParsedData reqType={"edit"} /> : <Login />
-          }
-        />
-        <Route
-          path="/dashboard/resume/:resumeId/edit"
-          element={<EditResume />}
-        />
-        <Route
-          path="/dashboard/resume/:resumeId/view"
-          element={<ViewResume />}
-        />
-        {/* // element={authUser ? <DashBoard /> : <Navigate to="/auth/login" />} */}
-        <Route
-          path="/:portfolioId"
-          element={authUser ? <PortfolioDisplay /> : <Login />}
-        />
-        <Route path="*" element={<PageNotFound />} />
-      </Routes>
+    <div className="min-h-screen">
+      {
+        authUser == undefined || authUser == null || authUser == "" ? (
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/auth">
+              <Route path="sign-in" element={<SignInPage />} />
+              <Route path="login" element={<Login />} />
+            </Route>
+            <Route path="/portfolio" >
+              <Route path="create" element={<Navigate to="/auth/login" />} />
+            </Route>
+            <Route path="*" element={<PageNotFound />} />
+          </Routes>
+        ) : (
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/auth">
+              <Route path="sign-in" element={<Navigate to="/" />} />
+              <Route path="login" element={<Navigate to="/" />} />
+            </Route>
+            <Route path="/dashboard">
+              <Route path="" element={<DashBoard />} />
+              <Route path="edit/:portfolioId" element={<ValidateParsedData reqType={"edit"} />} />
+              <Route path="resume/:resumeId/edit" element={<EditResume />} />
+              <Route path="resume/:resumeId/view" element={<ViewResume />} />
+            </Route>
+            <Route path="/portfolio" >
+              <Route path="create" element={<ResumeUpload />} />
+              <Route path="validate" element={<ValidateParsedData reqType={"validate"} />} />
+            </Route>
+            <Route path="/:portfolioId" element={<PortfolioDisplay />} />
+            <Route path="*" element={<PageNotFound />} />
+          </Routes>
+        )
+      }
       <Toaster />
     </div>
   );

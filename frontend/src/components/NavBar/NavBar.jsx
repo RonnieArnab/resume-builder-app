@@ -1,12 +1,19 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useAuthContext } from "@/context/AuthContext";
+import { useCookies } from "react-cookie";
 
 const Navbar = () => {
     const [open, setOpen] = useState(false);
     const { authUser } = useAuthContext();
+    const [cookies, setCookie,removeCookie] = useCookies(["authUser"]);
 
     const navigate = useNavigate()
+
+    const handleLogout = () => {
+        removeCookie("authUser",{path:'/'})
+        window.location.href = '/';
+    }
 
     return (
         <nav
@@ -232,7 +239,7 @@ const Navbar = () => {
                             >
                                 {authUser ? (
                                     <button
-                                        onClick={() => navigate('/')} class="bg-indigo-50 text-indigo-600 rounded-full cursor-pointer font-semibold text-center shadow-xs transition-all duration-500 py-3 px-6 text-sm hover:bg-indigo-100"
+                                        onClick={handleLogout} class="bg-indigo-50 text-indigo-600 rounded-full cursor-pointer font-semibold text-center shadow-xs transition-all duration-500 py-3 px-6 text-sm hover:bg-indigo-100"
                                     >
                                         Logout
                                     </button>

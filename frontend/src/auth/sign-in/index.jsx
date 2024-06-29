@@ -15,6 +15,10 @@ import { Loader2 } from "lucide-react";
 import { useToast } from "@/components/ui/use-toast";
 import useSignup from "@/useHooks/useSignup";
 
+import { GoogleLogin } from '@react-oauth/google';
+import useGoogleOauth from "@/useHooks/useGoogleOauth";
+
+
 export function SignInPage() {
   const [signinDetails, setSigninDetails] = useState({
     username: "",
@@ -36,6 +40,7 @@ export function SignInPage() {
   const { toast } = useToast();
 
   const signup = useSignup();
+  const googleSignIn = useGoogleOauth()
 
   const handleInputChange = (e) => {
     const { id, value } = e.target;
@@ -52,20 +57,28 @@ export function SignInPage() {
     }));
   };
 
-  const handleGoogleSignin = async (event) => {
-    event.preventDefault();
-    setIsLoading((prevState) => ({ ...prevState, google: true }));
-
-    // Simulate Google signin logic here
-    setTimeout(() => {
+  const handleGoogleLoginSuccess = async (response) => {
+    try {
+      setIsLoading((prevState) => ({ ...prevState, google: true }));
+      await googleSignIn({ credential_jwt: response.credential })
+      console.log("hi 00000000000000000")
+    }
+    catch (e) {
+    }
+    finally {
       setIsLoading((prevState) => ({ ...prevState, google: false }));
-      toast({
-        variant: "destructive",
-        title: "Uh oh! Something went wrong.",
-        description: "There was a problem with your Google sign-in.",
-      });
-    }, 5000);
+    }
   };
+
+  const handleGoogleLoginError = (error) => {
+    console.log(error)
+  };
+
+  // toast({
+  //   variant: "destructive",
+  //   title: "Uh oh! Something went wrong.",
+  //   description: "There was a problem with your Google sign-in.",
+  // });
 
   const handleSignin = async (event) => {
     event.preventDefault();
@@ -85,20 +98,16 @@ export function SignInPage() {
           </CardDescription>
         </CardHeader>
         <CardContent className="grid gap-4">
-          <div className="grid grid-cols-1">
-            <Button
-              className="w-full mb-3"
-              onClick={handleGoogleSignin}
-              disabled={isLoading.google}>
-              {isLoading.google ? (
-                <>
-                  <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                  Please Wait
-                </>
-              ) : (
-                "Google"
-              )}
-            </Button>
+          <div className="flex justify-center">
+            {isLoading.google ? (
+              <Button
+                className="w-full mb-3"
+                disabled={true}>
+                <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                Please Wait
+              </Button>
+            ) : <GoogleLogin onSuccess={handleGoogleLoginSuccess} onError={handleGoogleLoginError} />}
+
           </div>
           <div className="relative">
             <div className="absolute inset-0 flex items-center">

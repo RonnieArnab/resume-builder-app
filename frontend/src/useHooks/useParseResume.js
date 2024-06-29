@@ -1,12 +1,16 @@
+import { useAuthContext } from "@/context/AuthContext";
 import axios from "../api/axios";
 
 const useResumeParser = () => {
+    const {authUser} = useAuthContext()
+    const {token } = authUser
 
     const parseResume = async ({ formData, setUploadProgess }) => {
         try {
             const config = {
-                headers: {
-                    'content-type': 'multipart/form-data',
+                headers: { 
+                    "Content-Type": "application/json",
+                    "Authorization" : `Bearer ${token}`
                 },
                 onUploadProgress: function (progressEvent) {
                     const percentCompleted = Math.round((progressEvent.loaded * 100) / progressEvent.total);
