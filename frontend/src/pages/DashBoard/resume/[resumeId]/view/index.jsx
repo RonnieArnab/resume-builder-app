@@ -5,14 +5,16 @@ import { ResumeInfoContext } from "@/context/ResumeInfoContext";
 import useGetResume from "@/useHooks/useResume";
 import { useParams } from "react-router-dom";
 import { usePDF } from "react-to-pdf";
+import Navbar from "@/components/NavBar/NavBar";
 
 function ViewResume() {
   const params = useParams();
   const { fetchResume } = useGetResume();
   const { toPDF, targetRef } = usePDF({ filename: "page.pdf" });
+  const { fetchResumebyResumeId } = useGetResume();
   const [resumeInfo, setResumeInfo] = useState(async () => {
-    const resumeData = await fetchResume(params.resumeId);
-    return resumeData;
+    const { status, resume } = await fetchResumebyResumeId(params.resumeId);
+    return resume;
   });
 
   useEffect(() => {
@@ -20,8 +22,8 @@ function ViewResume() {
   }, []);
 
   const fetchData = async () => {
-    const resumeData = await fetchResume(params.resumeId);
-    setResumeInfo(resumeData);
+    const { status, resume } = await fetchResumebyResumeId(params.resumeId);
+    setResumeInfo(resume);
   };
 
   const handleDownLoad = () => {
@@ -29,25 +31,29 @@ function ViewResume() {
   };
 
   return (
-    <ResumeInfoContext.Provider value={{ resumeInfo, setResumeInfo }}>
-      <div id="no-print" className="my-10 mx-10 lg:mx-36 md:mx-20">
-        <h2 className="text-center text-2xl font-medium">
-          Congrats ! Your Resume has been compelety made{" "}
-        </h2>
-        <p className="text-center text-gray-500">
-          Now you can download your resume{" "}
-        </p>
-        <div className="flex justify-between mx-48 my-10">
-          <Button onClick={handleDownLoad}>Download</Button>
-          <Button>Share</Button>
+    <>
+      <Navbar />
+
+      <ResumeInfoContext.Provider value={{ resumeInfo, setResumeInfo }}>
+        <div id="topnav" className="my-10 mx-10 lg:mx-36 md:mx-20">
+          <h2 className="text-center text-2xl font-medium">
+            Congrats ! Your Resume has been compelety made{" "}
+          </h2>
+          <p className="text-center text-gray-500">
+            Now you can download your resume{" "}
+          </p>
+          <div className="flex justify-between mx-48 my-10">
+            <Button onClick={handleDownLoad}>Download</Button>
+            <Button>Share</Button>
+          </div>
         </div>
-      </div>
-      <div id="" ref={targetRef} className="my-10 mx-10 lg:mx-36 md:mx-20">
-        <div id="print-area">
-          <ResumePreview />
+        <div id="" ref={targetRef} className="my-10 mx-10 lg:mx-36 md:mx-20">
+          <div id="print-area">
+            <ResumePreview />
+          </div>
         </div>
-      </div>
-    </ResumeInfoContext.Provider>
+      </ResumeInfoContext.Provider>
+    </>
   );
 }
 

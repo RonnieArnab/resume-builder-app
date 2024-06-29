@@ -16,7 +16,23 @@ exports.getAllResume = async (req, res) => {
   }
 };
 
-exports.getResume = async (req, res) => {
+exports.getResumebyUserId = async (req, res) => {
+  try {
+    const { userId } = req.params;
+    const resume = await Resume.find({ userId });
+    res.status(200).json({
+      status: "success",
+      resume,
+    });
+  } catch (error) {
+    res.status(404).json({
+      status: "fail",
+      message: error.message,
+    });
+  }
+};
+
+exports.getResumebyId = async (req, res) => {
   try {
     const { id } = req.params;
     const resume = await Resume.findById(id);
@@ -31,7 +47,6 @@ exports.getResume = async (req, res) => {
     });
   }
 };
-
 exports.createResume = async (req, res) => {
   try {
     const resume = await Resume.create(req.body);

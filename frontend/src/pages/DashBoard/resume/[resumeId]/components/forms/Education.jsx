@@ -17,7 +17,7 @@ const initialFormDetails = {
   description: "",
 };
 function Education({ enableNext }) {
-  const [educationList, setEducationList] = useState([]);
+  const [educationList, setEducationList] = useState([initialFormDetails]);
   const { resumeInfo, setResumeInfo } = useContext(ResumeInfoContext);
   const [isLoading, setLoading] = useState(false);
   const { updateResume } = useGetResume();

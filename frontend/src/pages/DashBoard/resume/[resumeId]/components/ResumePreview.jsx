@@ -9,7 +9,7 @@ import ProjectePreview from "./preview/ProjectPreview";
 const ResumePreview = () => {
   const { resumeInfo, setResumeInfo } = useContext(ResumeInfoContext);
   return (
-    <div className="p-2">
+    <div className="p-2 shadow-lg rounded-lg border-t-primary border-t-4">
       <PersonalDetailPreview resumeInfo={resumeInfo} />
       <EducationPreview resumeInfo={resumeInfo} />
       <ExperiencePreview resumeInfo={resumeInfo} />

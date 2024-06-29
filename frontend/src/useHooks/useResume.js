@@ -1,41 +1,60 @@
-import axios from "axios";
+import axios from "@/api/axios";
+import { useAuthContext } from "@/context/AuthContext";
 
 const useGetResume = () => {
-  const fetchResume = async (resumeId) => {
-    console.log(resumeId);
+  const { authUser } = useAuthContext();
+  const { data } = authUser;
+  const _id = data.user._id;
+
+  const fetchResumebyResumeId = async (resumeId) => {
     try {
-      const response = await axios.get(
-        `http://127.0.0.1:8000/resume/${resumeId}`,
-        {
-          headers: {
-            "Content-Type": "application/json",
-          },
-        }
-      );
-      return response.data.resume;
+      const config = {
+        headers: { "Content-Type": "application/json" },
+      };
+
+      const response = await axios.get(`/resume/${resumeId}/resumeId`, config);
+
+      console.log(response.data);
+
+      return response.data;
     } catch (error) {
-      console.log(error);
+      console.error("Error:", error.message);
     }
+    console.log(_id, resumeId);
   };
 
   const updateResume = async (resumeId, data) => {
     try {
-      const response = await axios.patch(
-        `http://127.0.0.1:8000/resume/${resumeId}/update`,
-        data,
-        {
-          headers: {
-            "Content-Type": "application/json",
-          },
-        }
-      );
-      return response.data.resume;
+      const response = await axios.patch(`resume/${resumeId}/update`, data, {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+      return response.data;
     } catch (error) {
       console.log(error);
     }
   };
 
-  return { fetchResume, updateResume };
+  const createResume = async ({ title }) => {
+    try {
+      const data = {
+        title: title,
+        userId: _id,
+      };
+
+      const response = await axios.post(`resume/`, data, {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+      return response.data;
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  return { fetchResumebyResumeId, updateResume, createResume };
 };
 
 export default useGetResume;

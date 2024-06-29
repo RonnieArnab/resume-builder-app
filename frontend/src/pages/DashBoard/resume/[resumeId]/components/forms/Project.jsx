@@ -7,6 +7,7 @@ import useGetResume from "@/useHooks/useResume";
 import { useParams } from "react-router-dom";
 import { toast } from "@/components/ui/use-toast";
 import { Loader2 } from "lucide-react";
+import { MultiSelectInputProject } from "../MultiSelectInput";
 
 const initialFormDetails = {
   projectName: "",
@@ -14,8 +15,9 @@ const initialFormDetails = {
   githubLink: "",
   description: "",
 };
+
 function Project({ enableNext }) {
-  const [projectList, setProjectList] = useState([]);
+  const [projectList, setProjectList] = useState([initialFormDetails]);
   const { resumeInfo, setResumeInfo } = useContext(ResumeInfoContext);
   const [isLoading, setLoading] = useState(false);
   const { updateResume } = useGetResume();
@@ -34,7 +36,7 @@ function Project({ enableNext }) {
     setLoading(false);
     toast({
       title: "Details Updated",
-      description: "Personal Deatils Updated",
+      description: "Personal Details Updated",
     });
     enableNext(true);
   };
@@ -59,7 +61,6 @@ function Project({ enableNext }) {
   };
 
   const handleRichTextEditor = (event, name, index) => {
-    console.log(event, name, index);
     const newProjectList = [...projectList];
     newProjectList[index][name] = event.target.value;
     setProjectList(newProjectList);
@@ -100,6 +101,16 @@ function Project({ enableNext }) {
                   value={project.githubLink}
                   onChange={(event) => handleChange(event, index)}
                   className="w-full p-2 border rounded"
+                />
+              </div>
+              <div className="col-span-2">
+                <MultiSelectInputProject
+                  content={project}
+                  contentList={projectList}
+                  setContentList={setProjectList}
+                  fieldKey="technologies"
+                  label="Tech Stack"
+                  index={index}
                 />
               </div>
               <div className="col-span-2">

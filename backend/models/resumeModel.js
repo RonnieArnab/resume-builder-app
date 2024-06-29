@@ -36,6 +36,7 @@ const projectSchema = new mongoose.Schema({
 
 const resumeSchema = new mongoose.Schema({
   title: String,
+  userId: String,
   firstName: String,
   lastName: String,
   githubLink: String,

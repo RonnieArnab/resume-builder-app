@@ -6,22 +6,26 @@ import Navbar from "@/components/NavBar/NavBar";
 import { useAuthContext } from "@/context/AuthContext";
 import PortfolioCard from "@/components/PortfolioCard/PortfolioCard";
 import useFetchPortfolioList from "@/useHooks/useFetchPortfolioList";
+import useFetchResume from "@/useHooks/useFetchResume";
 
 function DashBoard() {
-  const cookies = useCookies(["authUser"]);
-
-  console.log(cookies[0].authUser.data.user._id);
-  const [resumeList, setResumeList] = useState([{ title: "Resume title" }]);
+  const [resumeList, setResumeList] = useState([]);
   const [portfolios, setPortfolios] = useState([]);
   const [isTabResume, setisTabResume] = useState(true);
   const { authUser } = useAuthContext();
 
+  const fetchResumeList = useFetchResume();
   const fetchPortfolioList = useFetchPortfolioList();
 
   useEffect(() => {
     async function fetchData() {
       try {
         const { data, status } = await fetchPortfolioList();
+        const response = await fetchResumeList();
+
+        if (response.status) {
+          setResumeList(response.resume);
+        }
         if (status) {
           setPortfolios(data);
         }

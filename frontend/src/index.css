@@ -3,7 +3,7 @@
 @tailwind utilities;
 
 @media print {
-  #no-print {
+  #topnav {
     display: none;
   }
 

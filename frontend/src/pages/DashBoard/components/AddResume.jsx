@@ -11,15 +11,29 @@ import {
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { useNavigate } from "react-router-dom";
+import useGetResume from "@/useHooks/useResume";
 function AddResume() {
   const [openDialog, setOpenDialog] = useState(false);
   const [isLoading, setLoading] = useState(false);
   const [resumeTitle, setResumeTitle] = useState("");
   const navigate = useNavigate();
+  const { createResume } = useGetResume();
 
-  const onCreate = () => {
+  const onCreate = async () => {
     setLoading(true);
-    navigate("/dashboard/resume/67289/edit");
+
+    try {
+      const { status, data } = await createResume(resumeTitle);
+
+      console.log(status, data);
+
+      if (status == "success") {
+        navigate(`resume/${data._id}/edit`);
+      }
+    } catch (err) {
+      console.log(err);
+    }
+    // navigate("/dashboard/resume/67289/edit");
     setLoading(false);
   };
 

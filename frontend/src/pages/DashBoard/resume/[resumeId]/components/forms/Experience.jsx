@@ -19,7 +19,7 @@ const initialFormDetails = {
 };
 
 function Experience({ enableNext }) {
-  const [experienceList, setExperienceList] = useState([]);
+  const [experienceList, setExperienceList] = useState([initialFormDetails]);
   const { resumeInfo, setResumeInfo } = useContext(ResumeInfoContext);
   const [isLoading, setLoading] = useState(false);
   const { updateResume } = useGetResume();
