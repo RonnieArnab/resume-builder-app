@@ -8,7 +8,7 @@ import { slideIn } from "../utils/motion";
 import useAlert from "../hooks/useAlert";
 import Alert from "./Alert";
 
-const Contact = () => {
+const Contact = ({data}) => {
   const formRef = useRef();
   const [form, setForm] = useState({
     name: "",
@@ -36,9 +36,9 @@ const Contact = () => {
         "template_0l7b11c",
         {
           from_name: form.name,
-          to_name: "Arnab",
+          to_name: data.name,
           from_email: form.email,
-          to_email: "as920037.arnabghosh@gmail.com",
+          to_email: data.email,
           message: form.message,
         },
         "KAxWjywl6H9gN0I_M"

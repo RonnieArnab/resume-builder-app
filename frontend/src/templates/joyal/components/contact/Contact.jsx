@@ -1,7 +1,7 @@
 import React from 'react'
 import "./Contact.css"
 
-function Contact() {
+function Contact({data}) {
   return (
     <div className='contact-root' id='contact'>
         <h6 className='contact-title'>CONTACT</h6>
@@ -13,7 +13,7 @@ function Contact() {
                 </span>
                 <div className='sub-sub'>
                     <h6>Location</h6>
-                    <p>Kochi, Kerala</p>
+                    <p>{data.location}</p>
                 </div>
             </div>
             <div className="sub-div">
@@ -22,7 +22,7 @@ function Contact() {
                 </span>
                 <div className='sub-sub'>
                     <h6>Mail</h6>
-                    <p>joyalshine2003@gmail.com</p>
+                    <p>{data.email}</p>
                 </div>
             </div>
         </div>

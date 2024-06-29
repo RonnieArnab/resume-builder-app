@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import './header.css'
 
-function Header() {
+function Header({data}) {
   const [navBar, setNavBar] = useState("mobile-nav closed-menu")
   function openNav(){
     setNavBar("mobile-nav")
@@ -19,7 +19,7 @@ function Header() {
     }
   }
   return <header className="header_bar">
-    <h3 className="name">Joyal Shine</h3>
+    <h3 className="name">{data.name}</h3>
     <nav className="nav_links">
       <ul className="nav_link_list">
         <li className="nav_link">

@@ -5,7 +5,7 @@
     min-height: 100vh;
 }
 .home_hero_row{
-    height: 100vh;
+    min-height: 100vh;
     display: flex;
 }
 .welcome_div{
@@ -49,6 +49,21 @@
     background-position: 50%;
     transition: all 1s ease-in-out;
 }
+
+.hero-image-user{
+    height: 24rem;
+    width: 23rem;
+    background-repeat: no-repeat;
+    background-size: cover;
+    /* border: 3px solid #2d2e32; */
+    /* border-radius: 60% 40% 30% 70%/60% 30% 70% 40%; */
+    /* position: relative; */
+    /* animation: morph 8s ease-in-out infinite; */
+    /* -webkit-animation: morph 8s ease-in-out infinite; */
+    background-position: 50%;
+    /* transition: all 1s ease-in-out; */
+}
+
 
 @-webkit-keyframes morph {
     0% {
@@ -99,6 +114,11 @@
     .home_hero{
         padding-top: 120px;
     }
+    /* .change-orientation{
+        flex-direction: column-reverse;
+        display: flex;
+    } */
+    
     
 }
 

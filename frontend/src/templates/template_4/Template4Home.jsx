@@ -1,21 +1,31 @@
-// import './Template4Home.css';
-import Contact from './sections/Contact/Contact';
-import Footer from './sections/Footer/Footer';
-import Hero from './sections/Hero/Hero';
-import Projects from './sections/Projects/Projects';
-import Skills from './sections/Skills/Skills';
-import { ThemeProvider } from './common/ThemeContext.jsx';
-
+import React, { useEffect } from "react";
+import About from "./partials/About";
+import Card from "./partials/Card.";
+import Footer from "./partials/Footer.";
+import Projects from "./partials/Projects.";
+import Skills from "./partials/Skills.";
+import data from "./assets/data";
+import AOS from "aos";
+import "aos/dist/aos.css";
 
 function Template4Home() {
+  useEffect(() => {
+    AOS.init({
+      once: true,
+    });
+  });
   return (
-    <ThemeProvider>
-      <Hero />
-      <Projects />
-      <Skills />
-      <Contact />
-      <Footer />
-    </ThemeProvider>
+    <div className="min-h-screen py-10 px-3 sm:px-5 bg-gray-100">
+      <div data-aos="fade-down" data-aos-duration="800">
+        <Card name={data.name} title={data.title} social={data.social} />
+      </div>
+      <div data-aos="fade-up" data-aos-duration="800" data-aos-delay="400">
+        <About title={data.about.title} description={data.about.description} />
+        <Skills skills={data.skills} />
+        <Projects projects={data.projects} />
+        <Footer github={data.social.github} />
+      </div>
+    </div>
   );
 }
 

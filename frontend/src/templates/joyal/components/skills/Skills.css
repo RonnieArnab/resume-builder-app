@@ -25,18 +25,18 @@
     width: 3rem;
     height: 3rem;
 }
-.stack-item{
+/* .stack-item{
     background-color: white;
-    border-radius: 2rem;
-    width: 4rem;
-    height: 4rem;
+    border-radius: 1rem;
+    width: 4rem !important;
+    height: 3rem;
     box-shadow: 0 0 10px rgba(0,0,0,.09);
     cursor: pointer;
     align-items: center;
     display: grid;
     justify-items: center;
     margin: 0.4rem;
-}
+} */
 .skill-set{
     justify-content: center;
 }
@@ -60,10 +60,10 @@
     }
 }
 
-.stack-items-innerDiv{
+/* .stack-items-innerDiv{
     display: flex;
     padding: 0;
-}
+} */
 
 
 @media (max-width:576px){

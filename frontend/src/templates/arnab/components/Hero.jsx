@@ -4,7 +4,12 @@ import { styles } from "../styles";
 import { download, resume } from "../assets";
 import { Tilt } from "react-tilt";
 import PropTypes from "prop-types";
-import { socialData } from "../constants";
+
+import {
+  githubLink,
+  instagram,
+  linkedin,
+} from "../assets";
 
 const SocialIcon = ({ icon, gradientClass, altText, linkClass, mediaLink }) => (
   <Tilt>
@@ -36,7 +41,31 @@ SocialIcon.propTypes = {
   mediaLink: PropTypes.string.isRequired,
 };
 
-const Hero = () => {
+const Hero = ({ data }) => {
+  const socialData = [
+    {
+      icon: instagram,
+      gradientClass: "instagram-gradient",
+      altText: "Instagram",
+      linkClass: "instagram",
+      mediaLink: data.instagram  ? data.instagram : "",
+    },
+    {
+      icon: linkedin,
+      gradientClass: "linkedin-gradient",
+      altText: "LinkedIn",
+      linkClass: "linkedin",
+      mediaLink: data.linkedin,
+    },
+    {
+      icon: githubLink,
+      gradientClass: "github-gradient",
+      altText: "GitHub",
+      linkClass: "github",
+      mediaLink: data.github,
+    },
+  ];
+
   return (
     <section className="relative w-full h-screen mx-auto">
       <div
@@ -48,7 +77,7 @@ const Hero = () => {
 
         <div className="">
           <h1 className={`${styles.heroHeadText} text-white`}>
-            Hi , I&apos;m <span className="text-[#915eff]">Arnab</span>
+            Hi , I&apos;m <span className="text-[#915eff]">{data.name.split(" ")[0]}</span>
           </h1>
           <p className={`${styles.heroSubText} mt-2 text-white-100`}>
             I am full stack devloper and <br className="sm:block hidden" />{" "}

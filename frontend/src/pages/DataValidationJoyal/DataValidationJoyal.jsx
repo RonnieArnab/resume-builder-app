@@ -1,14 +1,25 @@
 import Navbar from '@/components/NavBar/NavBar'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
+import useCreatePortfolio from '@/useHooks/useCreatePortfolio';
+import { useNavigate } from 'react-router-dom';
+import Swal from 'sweetalert2'
 
 
-function DataValidationJoyal() {
-    const [activeStep, setActiveStep] = useState(4);
+function DataValidationJoyal({ parsedData, reqType }) {
+    const [activeStep, setActiveStep] = useState(1);
     const [showAlert, setShowAlert] = useState(false)
     const [showAlertMsg, setShowAlertMsg] = useState("")
 
+    const [isLoading, setisLoading] = useState(false)
+
     const handleNext = () => setActiveStep((cur) => cur + 1);
     const handlePrev = () => setActiveStep((cur) => cur - 1);
+    const [modalURL, setmodalURL] = useState("")
+    const [copied, setCopied] = useState(false)
+
+    const createPortfolio = useCreatePortfolio()
+    const updatePortfolio = useEditPortfolio()
+    const navigate = useNavigate()
 
     const [basicDetails, setBasicDetais] = useState({
         name: '',
@@ -44,6 +55,22 @@ function DataValidationJoyal() {
 
     const [about, setAbout] = useState("")
 
+    useEffect(() => {
+        if (reqType == "validate") {
+            setBasicDetais(parsedData.basicDetails)
+            setSkillDetailsArray(parsedData.skills)
+            setProjectsArray(parsedData.projects)
+            setAbout(parsedData.about)
+        }
+        else {
+            setBasicDetais(parsedData.basicDetails)
+            setSkillDetailsArray(parsedData.skillDetailsArray)
+            setProjectsArray(parsedData.projectArray)
+            setAbout(parsedData.about)
+        }
+    }, [])
+
+
     const handleSubmitBasic = () => {
         if (basicDetails.name == '' || basicDetails.linkedin == '' || basicDetails.github == '' || basicDetails.location == '' || basicDetails.email == '') {
             setShowAlertMsg("Fill all the details")
@@ -78,20 +105,75 @@ function DataValidationJoyal() {
         else handleNext()
     }
 
+
+    const handleSubmitAbout = async () => {
+        setisLoading(true)
+        try {
+            if (about == '') {
+                setShowAlertMsg("Enter the about description")
+                setShowAlert(true)
+                setTimeout(() => {
+                    setShowAlert(false)
+                }, 5000)
+            }
+            else {
+                if (reqType == "validate") {
+                    await createPortfolio({ basicDetails, skillDetailsArray, projectArray, about, template: 'joyal' }).then(({ status, url }) => {
+                        if (status) {
+                            setmodalURL(WEBSITE_URL + url)
+                            console.log(status)
+                            document.getElementById('my_modal_1').showModal();
+                        }
+                    })
+                }
+                else {
+                    await updatePortfolio({ basicDetails, skillDetailsArray, projectArray, about, _id: parsedData._id }).then(({ status, url }) => {
+                        if (status) {
+                            Swal.fire({
+                                position: "center",
+                                icon: "success",
+                                title: "Portfolio has been updated",
+                                showConfirmButton: false,
+                                timer: 1500
+                            }).then((e) => {
+                                navigate('/dashboard')
+                            })
+                        }
+                    })
+                }
+            }
+        }
+        catch (e) { }
+        finally {
+            setisLoading(false)
+        }
+    }
     const handleFunctions = [
         handleSubmitBasic,
         handleSubmitSkills,
-        handleSubmitProjects
+        handleSubmitProjects,
+        handleSubmitAbout
     ]
 
-    const handleSubmitAbout = () => {
-
+    const copyToClipboard = () => {
+        if (!copied) {
+            const textInput = document.getElementById('copy-text');
+            textInput.select();
+            textInput.setSelectionRange(0, 99999);
+            try {
+                navigator.clipboard.writeText(textInput.value);
+                setCopied(true)
+                setTimeout(() => setCopied(false), 8000);
+            } catch (err) {
+                console.error('Failed to copy: ', err);
+            }
+        }
     }
 
     return (
         <div>
             <Navbar />
-            <div className='w-full mt-32 sm:p-5 p-3'>
+            <div className='w-full sm:mt-20 mt-10 sm:p-5 p-3'>
                 <div className='w-full flex justify-center'>
                     <ol class="flex items-center w-full sm:w-3/4 flex justify-center text-xs text-gray-900 font-medium sm:text-base">
                         <li class={`flex w-full relative after:content-[''] after:w-full after:h-0.5 after:inline-block after:absolute lg:after:top-5 after:top-3 after:left-4 transition duration-500 ${activeStep > 1 ? "after:bg-indigo-600 text-indigo-600" : "after:bg-gray-200 text-gray-900"}`}>
@@ -163,7 +245,7 @@ function DataValidationJoyal() {
                                     <div className=' border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500'>
                                         <div className='bg-gray-50 border border-gray-300 p-2 mb-2 rounded-lg flex flex-wrap'>
                                             {skillDetailsArray.frontend.map((item, index) => {
-                                                return (<span id={`badge-dismiss-indigo-${index}`} key={index} class="inline-flex items-center px-2 py-1 me-2 text-sm font-medium text-indigo-800 bg-indigo-100 rounded dark:bg-indigo-900 dark:text-indigo-300">
+                                                return (<span id={`badge-dismiss-indigo-${index}`} key={index} class="inline-flex items-center px-2 py-1 m-1 text-sm font-medium text-indigo-800 bg-indigo-100 rounded dark:bg-indigo-900 dark:text-indigo-300">
                                                     {item}
                                                     <button type="button" onClick={() => {
                                                         let frontend = skillDetailsArray.frontend.filter(x => x != item);
@@ -199,7 +281,7 @@ function DataValidationJoyal() {
                                     <div className=' border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500'>
                                         <div className='bg-gray-50 border border-gray-300 p-2 mb-2 rounded-lg flex flex-wrap'>
                                             {skillDetailsArray.backend.map((item, index) => {
-                                                return (<span id={`badge-dismiss-indigo-${index}`} key={index} class="inline-flex items-center px-2 py-1 me-2 text-sm font-medium text-indigo-800 bg-indigo-100 rounded dark:bg-indigo-900 dark:text-indigo-300">
+                                                return (<span id={`badge-dismiss-indigo-${index}`} key={index} class="inline-flex items-center px-2 py-1 m-1 text-sm font-medium text-indigo-800 bg-indigo-100 rounded dark:bg-indigo-900 dark:text-indigo-300">
                                                     {item}
                                                     <button type="button" onClick={() => {
                                                         let backend = skillDetailsArray.backend.filter(x => x != item);
@@ -235,7 +317,7 @@ function DataValidationJoyal() {
                                     <div className=' border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500'>
                                         <div className='bg-gray-50 border border-gray-300 p-2 mb-2 rounded-lg flex flex-wrap'>
                                             {skillDetailsArray.app.map((item, index) => {
-                                                return (<span id={`badge-dismiss-indigo-${index}`} key={index} class="inline-flex items-center px-2 py-1 me-2 text-sm font-medium text-indigo-800 bg-indigo-100 rounded dark:bg-indigo-900 dark:text-indigo-300">
+                                                return (<span id={`badge-dismiss-indigo-${index}`} key={index} class="inline-flex items-center px-2 py-1 m-1 text-sm font-medium text-indigo-800 bg-indigo-100 rounded dark:bg-indigo-900 dark:text-indigo-300">
                                                     {item}
                                                     <button type="button" onClick={() => {
                                                         let app = skillDetailsArray.app.filter(x => x != item);
@@ -271,7 +353,7 @@ function DataValidationJoyal() {
                                     <div className=' border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500'>
                                         <div className='bg-gray-50 border border-gray-300 p-2 mb-2 rounded-lg flex flex-wrap'>
                                             {skillDetailsArray.others.map((item, index) => {
-                                                return (<span id={`badge-dismiss-indigo-${index}`} key={index} class="inline-flex items-center px-2 py-1 me-2 text-sm font-medium text-indigo-800 bg-indigo-100 rounded dark:bg-indigo-900 dark:text-indigo-300">
+                                                return (<span id={`badge-dismiss-indigo-${index}`} key={index} class="inline-flex items-center px-2 py-1 m-1 text-sm font-medium text-indigo-800 bg-indigo-100 rounded dark:bg-indigo-900 dark:text-indigo-300">
                                                     {item}
                                                     <button type="button" onClick={() => {
                                                         let others = skillDetailsArray.others.filter(x => x != item);
@@ -318,7 +400,7 @@ function DataValidationJoyal() {
                                 }} >
                                     <div class="mb-6">
                                         <label for="message" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Give Short Introduction about yourself</label>
-                                        <textarea id="message" value={about} onChange={(e) => setAbout(e.target.value )} rows="4" class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Write your thoughts here..."></textarea>
+                                        <textarea id="message" value={about} onChange={(e) => setAbout(e.target.value)} rows="4" class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Write your thoughts here..."></textarea>
                                     </div>
                                     <button type="submit" class="hidden text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Submit</button>
                                 </form>
@@ -348,8 +430,43 @@ function DataValidationJoyal() {
                 </button>
             </div>
 
+            <dialog id="my_modal_1" className="modal">
+                <div className="modal-box">
+                    <h3 className="font-bold text-lg">URL</h3>
 
+                    <div className='modal-action justify-center'>
+                        <div className="w-full max-w-[20rem]">
+                            <div className="relative ">
+                                <label htmlFor="copy-text" className="sr-only">Label</label>
+                                <input id="copy-text" type="text" className="col-span-6 bg-gray-50 border border-gray-300 text-gray-500 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full px-2.5 py-4 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-gray-400 dark:focus:ring-blue-500 dark:focus:border-blue-500" value={modalURL} disabled readOnly />
+                                <button data-copy-to-clipboard-target="npm-install-copy-text" onClick={copyToClipboard} className="absolute end-2.5 top-1/2 -translate-y-1/2 text-gray-900 dark:text-gray-400 hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-600 dark:hover:bg-gray-700 rounded-lg py-2 px-2.5 inline-flex items-center justify-center bg-white border-gray-200 border">
+                                    <span id="default-message" className={copied ? "hidden inline-flex items-center" : "inline-flex items-center"}>
+                                        <svg className="w-3 h-3 me-1.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 18 20">
+                                            <path d="M16 1h-3.278A1.992 1.992 0 0 0 11 0H7a1.993 1.993 0 0 0-1.722 1H2a2 2 0 0 0-2 2v15a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V3a2 2 0 0 0-2-2Zm-3 14H5a1 1 0 0 1 0-2h8a1 1 0 0 1 0 2Zm0-4H5a1 1 0 0 1 0-2h8a1 1 0 1 1 0 2Zm0-5H5a1 1 0 0 1 0-2h2V2h4v2h2a1 1 0 1 1 0 2Z" />
+                                        </svg>
+                                        <span className="text-xs font-semibold">Copy</span>
+                                    </span>
+                                    <span id="success-message" className={copied ? " inline-flex items-center" : "hidden inline-flex items-center"}>
+                                        <svg className="w-3 h-3 text-blue-700 dark:text-blue-500 me-1.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 16 12">
+                                            <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M1 5.917 5.724 10.5 15 1.5" />
+                                        </svg>
+                                        <span className="text-xs font-semibold text-blue-700 dark:text-blue-500">Copied</span>
+                                    </span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
 
+                    <div className="modal-action">
+                        <form method="dialog">
+                            <button className="btn" onClick={() => {
+                                document.getElementById('my_modal_1').close();
+                                navigate('/dashboard');
+                            }}>Close</button>
+                        </form>
+                    </div>
+                </div>
+            </dialog>
         </div>
     )
 }
@@ -357,6 +474,9 @@ function DataValidationJoyal() {
 export default DataValidationJoyal
 
 import './DataValidationJoyal.css'
+import { WEBSITE_URL } from '@/assets/dataAssets';
+import useEditPortfolio from '@/useHooks/useEditPortfolio';
+
 function ProjectInput({ setProjectsArray, projectsArray, setProjectDetails, projectDetails, handleSubmitProjects, setShowAlert, setShowAlertMsg }) {
     const addProject = () => {
         if (projectDetails.title == "" || projectDetails.desc == "" || projectDetails.techStack == "") {

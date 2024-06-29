@@ -6,6 +6,7 @@ module.exports = {
     './components/**/*.{js,jsx}',
     './app/**/*.{js,jsx}',
     './src/**/*.{js,jsx}',
+    "./node_modules/flowbite/**/*.js"
   ],
   prefix: "",
   theme: {
@@ -83,6 +84,6 @@ module.exports = {
     require("tailwindcss-animate"),
     require("tailgrids/plugin"),
     require('flowbite/plugin'),
-    require('daisyui'),
+    require('daisyui'), 
   ]
 }

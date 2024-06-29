@@ -231,35 +231,10 @@ const projects = [
   },
 ];
 
-const socialData = [
-  {
-    icon: instagram,
-    gradientClass: "instagram-gradient",
-    altText: "Instagram",
-    linkClass: "instagram",
-    mediaLink: "https://www.instagram.com/arnabghosssh/",
-  },
-  {
-    icon: linkedin,
-    gradientClass: "linkedin-gradient",
-    altText: "LinkedIn",
-    linkClass: "linkedin",
-    mediaLink: "https://www.linkedin.com/in/arnab-ghosh-828210283/",
-  },
-  {
-    icon: githubLink,
-    gradientClass: "github-gradient",
-    altText: "GitHub",
-    linkClass: "github",
-    mediaLink: "https://github.com/RonnieArnab",
-  },
-];
-
 export {
   services,
   technologies,
   experiences,
   testimonials,
-  projects,
-  socialData,
+  projects
 };

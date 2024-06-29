@@ -105,7 +105,8 @@ function DataValidationTemplate3() {
 
     return (
         <div>
-            <Navbar />
+            Template 3 Validation
+            {/* <Navbar />
             <div className='w-full mt-32 sm:p-5 p-3'>
                 <div className='w-full flex justify-center'>
                     <ol class="flex items-center w-full sm:w-3/4 flex justify-center text-xs text-gray-900 font-medium sm:text-base">
@@ -297,7 +298,7 @@ function DataValidationTemplate3() {
                         <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6" />
                     </svg>
                 </button>
-            </div>
+            </div> */}
 
 
 

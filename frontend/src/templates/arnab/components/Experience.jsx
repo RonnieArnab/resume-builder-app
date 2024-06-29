@@ -10,7 +10,7 @@ import { experiences } from "../constants";
 import { SectionWrapper } from "../hoc";
 import { textVariant } from "../utils/motion";
 
-const ExperienceCard = (experience) => {
+const ExperienceCard = ({experience}) => {
   return (
     <VerticalTimelineElement
       contentStyle={{
@@ -18,13 +18,13 @@ const ExperienceCard = (experience) => {
         color: "#fff",
       }}
       contentArrowStyle={{ borderRight: "7px solid  #232631" }}
-      date={experience.experience.date}
-      iconStyle={{ background: experience.experience.iconBg }}
+      date={experience.period}
+      iconStyle={{ background: "#383E56" }}
       icon={
         <div className="flex justify-center items-center w-full h-full">
           <img
-            src={experience.experience.icon}
-            alt={experience.experience.company_name}
+            src='/src/templates/arnab/assets/company/meta.png'
+            alt={""}
             className="w-[60%] h-[60%] object-contain"
           />
         </div>
@@ -32,31 +32,31 @@ const ExperienceCard = (experience) => {
     >
       <div>
         <h3 className="text-white text-[24px] font-bold">
-          {experience.experience.title}
+          {experience.role}
         </h3>
         <p
           className="text-secondary text-[16px] font-semibold"
           style={{ margin: 0 }}
         >
-          {experience.experience.company_name}
+          {experience.companyname}
         </p>
       </div>
 
       <ul className="mt-5 list-disc ml-5 space-y-2">
-        {experience.experience.points.map((point, index) => (
+        {/* {experience.points.map((point, index) => (
           <li
             key={`experience-point-${index}`}
             className="text-white-100 text-[14px] pl-1 tracking-wider"
           >
             {point}
           </li>
-        ))}
+        ))} */}
       </ul>
     </VerticalTimelineElement>
   );
 };
 
-const Experience = () => {
+const Experience = ({data}) => {
   return (
     <>
       <motion.div variants={textVariant()}>
@@ -66,7 +66,7 @@ const Experience = () => {
       <AnimatePresence>
         <div className="mt-20 flex flex-col">
           <VerticalTimeline>
-            {experiences.map((experience, index) => {
+            {data.map((experience, index) => {
               return <ExperienceCard key={index} experience={experience} />;
             })}
           </VerticalTimeline>

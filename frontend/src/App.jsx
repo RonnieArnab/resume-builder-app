@@ -9,13 +9,18 @@ import DashBoard from "./pages/DashBoard";
 import { useAuthContext } from "./context/AuthContext";
 import EditResume from "./pages/DashBoard/resume/[resumeId]";
 import { Toaster } from "./components/ui/toaster";
+import Navbar from "./components/NavBar/NavBar";
+import ResumeUpload from "./pages/ResumeUpload/ResumeUpload";
+import ValidateParsedData from "./pages/ValidateParsedData/ValidateParsedData";
+import PortfolioDisplay from "./pages/PortfolioDisplay/PortfolioDisplay";
+import PageNotFound from "./pages/PageNotFound/PageNotFound";
 
 function App() {
   const { authUser } = useAuthContext();
 
   return (
     <div>
-      {/* <Header /> */}
+      {/* <Navbar /> */}
       <Routes>
         <Route path="/" element={<Home />} />
         <Route
@@ -28,9 +33,29 @@ function App() {
           element={authUser ? <Navigate to="/dashboard" /> : <Login />}
         />
         <Route
+          path="/portfolio/create"
+          element={authUser ? <ResumeUpload/> : <Login />}
+        />
+        <Route
+          path="/portfolio/validate"
+          element={authUser ? <ValidateParsedData reqType={"validate"}/> : <Login />}
+        />
+        <Route
+          path="/dashboard/edit/:portfolioId"
+          element={authUser ? <ValidateParsedData reqType={"edit"}/> : <Login />}
+        />
+        <Route
           path="/dashboard/resume/:resumeId/edit"
           element={<EditResume />}></Route>
         {/* // element={authUser ? <DashBoard /> : <Navigate to="/auth/login" />} */}
+        <Route
+          path="/:portfolioId"
+          element={authUser ? <PortfolioDisplay/> : <Login />}
+        />
+        <Route
+          path="*"
+          element={<PageNotFound />}
+        />
       </Routes>
       <Toaster />
     </div>

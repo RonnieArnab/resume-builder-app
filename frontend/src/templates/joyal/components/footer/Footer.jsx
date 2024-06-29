@@ -1,7 +1,7 @@
 import React from 'react'
 import './Footer.css'
 
-function Footer() {
+function Footer({data}) {
   return (
     <div className='footer-root'>
         <div className='footer-div'>
@@ -10,12 +10,12 @@ function Footer() {
             </div>
             <div className="links-footer">
                 <span>
-                    <a href="https://www.linkedin.com/in/joyal-shine/" target="_blank" rel="noreferrer">
+                    <a href={data.linkedin} target="_blank" rel="noreferrer">
                         <i className="fa-brands fa-linkedin"></i>
                     </a>
                 </span>
                 <span>
-                    <a href="https://github.com/joyalshine"  target="_blank" rel="noreferrer">
+                    <a href={data.github}  target="_blank" rel="noreferrer">
                         <i className="fa-brands fa-github"></i> 
                     </a>
                 </span>

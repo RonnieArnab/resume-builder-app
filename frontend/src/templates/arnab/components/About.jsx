@@ -5,6 +5,7 @@ import { styles } from "../styles";
 import { services } from "../constants";
 import { fadeIn, textVariant } from "../utils/motion";
 import { SectionWrapper } from "../hoc";
+import { web,backend,mobile } from "../assets";
 
 const ServiceCard = ({ index, title, icon }) => {
   return (
@@ -23,7 +24,12 @@ const ServiceCard = ({ index, title, icon }) => {
   );
 };
 
-const About = () => {
+const About = ({data}) => {
+  const icons = [
+    web,
+    backend,
+    mobile
+  ]
   return (
     <AnimatePresence>
       <>
@@ -35,18 +41,12 @@ const About = () => {
         <motion.p
           variants={fadeIn("", "", 0.1, 1)}
           className="mt-4 text-secondary text-[17px] max-w-3xl leading-[30px] ">
-          Software engineering is a dynamic and ever-evolving discipline that
-          plays a pivotal role in today's technology-driven world. It
-          encompasses the systematic design, development, testing, and
-          maintenance of software systems, aiming to create efficient, reliable,
-          and user-friendly solutions to a wide range of problems. Software
-          engineers use their creativity and problem-solving skills to translate
-          user
+          {data.about}
         </motion.p>
 
         <div className="mt-20 flex flex-wrap gap-10">
-          {services.map((service, index) => (
-            <ServiceCard key={service.title} index={index} {...service} />
+          {data.roles.map((service, index) => (
+            <ServiceCard key={index} title={service} index={index} icon={icons[index%3]} />
           ))}
         </div>
       </>

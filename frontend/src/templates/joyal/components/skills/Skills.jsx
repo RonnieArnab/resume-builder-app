@@ -1,102 +1,88 @@
 import React from 'react'
 import './Skills.css'
 
-function Skills() {
-  return (
-    <div className='skills-parent container-fluid' id="skills">
-        <div className='child'>
-            <div className="skill-set row m-1">
-                <div className="col-md-3 stack-title">
-                    <div className="">
-                        <h5>Front-End</h5>
-                    </div>
-                </div>
-                <div className="col-12 col-md-9 stack-items row">
-                    <div className="col-sm-6 col-md-6 stack-items-innerDiv">
-                        <div className="stack-item">
-                            <img src='/template/joyal/icons/html.png' alt="" />
-                        </div>
-                        <div className="stack-item">
-                            <img src='/template/joyal/icons/css.png' alt="" />
-                        </div>
-                        <div className="stack-item">
-                            <img src='/template/joyal/icons/javascript.png' alt="" />
+function Skills({ data }) {
+    return (
+        <div className='skills-parent container-fluid' id="skills">
+            <div className='child'>
+                {data.frontend.length != 0 ? <div className="skill-set flex flex-col sm:flex-row  m-3">
+                    <div className="stack-title w-full sm:w-[14vw]">
+                        <div className="">
+                            <h5>Front-End</h5>
                         </div>
                     </div>
-                    <div className="col-12 col-sm-6 col-md-6 stack-items-innerDiv">
-                        <div className="stack-item">
-                            <img src='/template/joyal/icons/react.png' alt="" />
-                        </div>
-                        <div className="stack-item ">
-                            <img src='/template/joyal/icons/html.png' alt="" />
-                        </div>
-                        <div className="stack-item">
-                            <img src='/template/joyal/icons/bootstrap.png' alt="" />
+                    <div className="stack-items w-full sm:w-auto sm:ml-5">
+                        <div className="stack-items-innerDiv flex flex-wrap justify-center gap-4">
+                            {data.frontend.map((skill) => {
+                                return (
+                                <div className="text-white bg-gradient-to-br from-purple-600 to-blue-500 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 font-medium rounded-lg text-sm px-3 py-2 text-center me-2">
+                                    {skill}
+                                </div>
+                                )
+                            })}
                         </div>
                     </div>
-                </div>
-            </div>
+                </div> : <></>}
 
-            <div className="skill-set row m-1">
-                <div className="col-md-3 stack-title">
-                    <div className="">
-                        <h5>Back-End</h5>
-                    </div>
-                </div>
-                <div className="col-md-9 stack-items row">
-                    <div className="col-sm-6 col-md-6 stack-items-innerDiv">
-                        <div className="stack-item">
-                            <img src='/template/joyal/icons/nodejs.png' alt="" />
-                        </div>
-                        <div className="stack-item">
-                            <img src='/template/joyal/icons/express.png' alt="" />
-                        </div>
-                        <div className="stack-item">
-                            <img src='/template/joyal/icons/mongodb.png' alt="" />
+                {data.backend.length != 0 ? <div className="skill-set flex flex-col sm:flex-row  m-3">
+                    <div className="stack-title w-full sm:w-[14vw]">
+                        <div className="">
+                            <h5>Back-End</h5>
                         </div>
                     </div>
-                    <div className="col-12 col-sm-6 col-md-6 stack-items-innerDiv">
-                        <div className="stack-item">
-                            <img src='/template/joyal/icons/firebase.png' alt="" />
-                        </div>
-                        <div className="stack-item">
-                            <img src='/template/joyal/icons/mysql.png' alt="" />
+                    <div className="stack-items w-full sm:w-auto sm:ml-5">
+                        <div className="stack-items-innerDiv flex flex-wrap justify-center gap-4">
+                            {data.backend.map((skill) => {
+                                return (
+                                <div className="text-white bg-gradient-to-br from-purple-600 to-blue-500 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 font-medium rounded-lg text-sm px-3 py-2 text-center me-2">
+                                    {skill}
+                                </div>
+                                )
+                            })}
                         </div>
                     </div>
-                </div>
-            </div>
+                </div> : <></>}
 
-            <div className="skill-set row m-1">
-                <div className="col-md-3 stack-title">
-                    <div className="">
-                        <h5>App</h5>
+                {data.app.length != 0 ? <div className="skill-set flex flex-col sm:flex-row  m-3">
+                    <div className="stack-title w-full sm:w-[14vw]">
+                        <div className="">
+                            <h5>App</h5>
+                        </div>
                     </div>
-                </div>
-                <div className="col-md-9 stack-items">
-                    <div className="stack-item">
-                        <img src='/template/joyal/icons/flutter.png' alt="" />
+                    <div className="stack-items w-full sm:w-auto sm:ml-5">
+                        <div className="stack-items-innerDiv flex flex-wrap justify-center gap-4">
+                            {data.app.map((skill) => {
+                                return (
+                                <div className="text-white bg-gradient-to-br from-purple-600 to-blue-500 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 font-medium rounded-lg text-sm px-3 py-2 text-center me-2">
+                                    {skill}
+                                </div>
+                                )
+                            })}
+                        </div>
                     </div>
-                </div>
-            </div>
+                </div> : <></>}
 
-            <div className="skill-set row m-1">
-                <div className="col-md-3 stack-title">
-                    <div className="">
-                        <h5>Other Skills</h5>
+                {data.others.length != 0 ? <div className="skill-set flex flex-col sm:flex-row  m-3">
+                    <div className="stack-title w-full sm:w-[14vw]">
+                        <div className="">
+                            <h5>Others</h5>
+                        </div>
                     </div>
-                </div>
-                <div className="col-md-9 stack-items">
-                    <div className="stack-item">
-                        <img src='/template/joyal/icons/figma.png' alt="" />
+                    <div className="stack-items w-full sm:w-auto sm:ml-5">
+                        <div className="stack-items-innerDiv flex flex-wrap justify-center gap-4">
+                            {data.others.map((skill) => {
+                                return (
+                                <div className="text-white bg-gradient-to-br from-purple-600 to-blue-500 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 font-medium rounded-lg text-sm px-3 py-2 text-center me-2">
+                                    {skill}
+                                </div>
+                                )
+                            })}
+                        </div>
                     </div>
-                    <div className="stack-item">
-                        <img src='/template/joyal/icons/git.png' alt="" />
-                    </div>
-                </div>
+                </div> : <></>}
             </div>
         </div>
-    </div>
-  )
+    )
 }
 
 export default Skills

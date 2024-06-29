@@ -1,15 +1,25 @@
 import React, { useState } from "react";
 import Navbar from "../NavBar/NavBar";
+import { useAuthContext } from "@/context/AuthContext";
+import { Link,useNavigate } from "react-router-dom";
 
 const Hero = () => {
+  const { authUser } = useAuthContext();
+  const navigate = useNavigate();
+
+  const handlePortfolioBtn = () => {
+    if(authUser) navigate('/portfolio/create')
+    else navigate("/auth/sign-in")
+  }
+
   return (
     <>
-      <Navbar />
-      <div className="relative bg-white pb-[110px] pt-[120px] dark:bg-dark lg:pt-[150px]">
+      {/* <Navbar /> */}
+      <div className="relative bg-white pb-[110px] pt-[70px] dark:bg-dark lg:pt-[80px]">
         <div className="container">
           <div className="-mx-4 flex flex-wrap">
             <div className="w-full px-4 lg:w-5/12">
-              <div className="hero-content">
+              <div className="hero-content flex-col">
                 <h1 className="mb-5 text-4xl font-bold !leading-[1.208] text-dark dark:text-white sm:text-[42px] lg:text-[40px] xl:text-5xl">
                   Kickstart Startup Website with TailGrids
                 </h1>
@@ -20,7 +30,7 @@ const Hero = () => {
                 </p>
                 <ul className="flex flex-wrap items-center">
                   <button type="button" class="text-white bg-gradient-to-r from-cyan-500 to-blue-500 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-cyan-300 dark:focus:ring-cyan-800 font-medium rounded-lg text-md px-5 py-2.5 text-center me-2 mb-2">Resume </button>
-                  <button type="button" class="text-white bg-gradient-to-br from-green-400 to-blue-600 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-green-200 dark:focus:ring-green-800 font-medium rounded-lg text-md px-5 py-2.5 text-center me-2 mb-2">Portfolio</button>
+                  <button type="button" onClick={handlePortfolioBtn} class="text-white bg-gradient-to-br from-green-400 to-blue-600 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-green-200 dark:focus:ring-green-800 font-medium rounded-lg text-md px-5 py-2.5 text-center me-2 mb-2">Portfolio</button>
 
                 </ul>
                 {/* <div className="clients pt-16">
