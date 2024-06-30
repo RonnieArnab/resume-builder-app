@@ -12,6 +12,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { useNavigate } from "react-router-dom";
 import useGetResume from "@/useHooks/useResume";
+import { toast } from "@/components/ui/use-toast";
 function AddResume() {
   const [openDialog, setOpenDialog] = useState(false);
   const [isLoading, setLoading] = useState(false);
@@ -48,7 +49,7 @@ function AddResume() {
       <Dialog open={openDialog} onOpenChange={setOpenDialog}>
         <DialogContent className="sm:max-w-[425px]">
           <DialogHeader>
-            <DialogTitle className="font-bold text-2xl">
+            <DialogTitle className="font-bold text-xl">
               Create a new Resume
             </DialogTitle>
             <DialogDescription>

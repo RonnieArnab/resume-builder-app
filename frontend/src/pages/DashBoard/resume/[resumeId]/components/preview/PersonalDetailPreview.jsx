@@ -7,23 +7,27 @@ function PersonalDetailPreview({ resumeInfo }) {
         <h2 className="font-bold text-lg">
           {resumeInfo.firstName} {resumeInfo.lastName}
         </h2>
-        <h2 className="text-sm">{resumeInfo.email}</h2>
-        <a
-          target="_blank"
-          className="text-sm font-normal"
-          href={resumeInfo.githubLink}>
-          Github
-        </a>
+        <h2 className="text-xs">{resumeInfo.email}</h2>
+        <h2>
+          <a
+            target="_blank"
+            className="text-xs font-normal"
+            href={resumeInfo.githubLink}>
+            Github
+          </a>
+        </h2>
       </div>
       <div className="text-right">
-        <h2 className="text-sm">Email: {resumeInfo.email}</h2>
-        <h2 className="text-sm">Mobile: {resumeInfo.phone}</h2>
-        <a
-          target="_blank"
-          className="text-sm font-normal"
-          href={resumeInfo.LinkedinLink}>
-          Linkedin
-        </a>
+        <h2 className="text-xs">Email: {resumeInfo.email}</h2>
+        <h2 className="text-xs">Mobile: {resumeInfo.phone}</h2>
+        <h2>
+          <a
+            target="_blank"
+            className="text-xs font-normal"
+            href={resumeInfo.LinkedinLink}>
+            Linkedin
+          </a>
+        </h2>
       </div>
     </div>
   );

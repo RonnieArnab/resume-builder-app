@@ -90,11 +90,17 @@ function DashBoard() {
               isTabResume ? "" : "hidden"
             } p-4 rounded-lg bg-gray-50 dark:bg-gray-800`}>
             <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 mt-10 gap-5">
-              <AddResume />
-              {resumeList.length > 0 &&
-                resumeList.map((resume, index) => (
-                  <ResumeCardItem key={index} resume={resume} />
-                ))}
+              {resumeList.length == 0 ? (
+                "No Resume"
+              ) : (
+                <>
+                  <AddResume />
+                  {resumeList.length > 0 &&
+                    resumeList.map((resume, index) => (
+                      <ResumeCardItem key={index} resume={resume} />
+                    ))}
+                </>
+              )}
             </div>
           </div>
           <div

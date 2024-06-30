@@ -3,7 +3,7 @@ import React from "react";
 function SkillsPreview({ resumeInfo }) {
   return (
     <div className="my-6">
-      <h2 className="text-left font-bold text-md mb-2">Skills</h2>
+      <h2 className="text-left font-bold  text-lg mb-2">Skills</h2>
       <hr className="border-black border-[1.5px] my-1" />
       <div className="grid grid-cols-2 gap-3 my-4">
         <div>

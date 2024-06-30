@@ -34,7 +34,10 @@ function EditResume() {
     <ResumeInfoContext.Provider value={{ resumeInfo, setResumeInfo }}>
       <div className="grid grid-cols-1 md:grid-cols-2 p-5 gap-10">
         <FormSection />
-        <ResumePreview />
+        <div className="">
+          <h2 className="mb-4 text-center text-lg ">Resume Preview</h2>
+          <ResumePreview />
+        </div>
       </div>
     </ResumeInfoContext.Provider>
   );
