@@ -3,9 +3,9 @@ import './banner.css'
 
 function Banner({ data }) {
     return (
-        <div className='home_hero container-fluid' id='home'>
-            <div className='row home_hero_row'>
-                <div className="col-md-7 welcome_div order-1">
+        <div className='home_hero' id='home'>
+            <div className='flex flex-col-reverse md:flex-row  home_hero_row'>
+                <div className="w-full md:w-1/2 welcome_div order-1">
                     <div className='width_control'>
                         <span>
                             <h1>Full Stack Developer<img src="https://stefantopalovicdev.vercel.app/static/media/waving.1bae5fcfb51082b5c2b4.png" width={50} alt="" /></h1>
@@ -27,7 +27,7 @@ function Banner({ data }) {
                         </div>
                     </div>
                 </div>
-                <div className="col-md-5 welcome_gif order-2">
+                <div className="w-full md:w-1/2 welcome_gif order-2">
                     {data.image ?
                         <div className='hero-image'>
                         </div> :

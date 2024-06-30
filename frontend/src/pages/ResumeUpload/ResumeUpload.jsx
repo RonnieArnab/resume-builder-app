@@ -62,11 +62,9 @@ function ResumeUpload() {
                 formData.append('file', selectedFile);
                 formData.append('template', selectedTemplate);
 
-                await parseResume({ formData, setUploadProgess }).then(({status,parsedData}) => {
-                    console.log("----------")
-                    console.log(status)
-                    if(status){
-                        navigate('/portfolio/validate', { state: { parsedData ,template:selectedTemplate} });
+                await parseResume({ formData, setUploadProgess }).then(({ status, parsedData }) => {
+                    if (status) {
+                        navigate('/portfolio/validate', { state: { parsedData, template: selectedTemplate } });
                     }
                 })
 
@@ -83,7 +81,7 @@ function ResumeUpload() {
     return (
         <div>
             <Navbar />
-            <div className="w-full mt-32 h-screen flex flex-col align-items-center">
+            <div className="w-full mt-32 my-auto flex flex-col items-center">
                 <div class="w-3/4 sm:w-2/4 py-9 bg-gray-50 rounded-2xl border border-gray-300 gap-3 grid border-dashed">
                     <div class="grid gap-1">
                         <svg class="mx-auto" width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -135,7 +133,7 @@ function ResumeUpload() {
 
 
 
-            {selectedFile != '' ? <div className='p-5 w-full mt-28'>
+            {selectedFile != '' ? <div className='p-5 w-full mt-20 p-10 sm:p-16 lg:28'>
                 <div className=' p-3 bg-gray-50 rounded-2xl border border-gray-300 gap-3 grid border-dashed'>
                     <div>
                         <h5 class="mb-4 text-md font-extrabold text-gray-900 dark:text-white md:text-lg lg:text-2xl">Select a <span class="text-transparent bg-clip-text bg-gradient-to-r to-emerald-600 from-sky-400">Template.</span></h5>

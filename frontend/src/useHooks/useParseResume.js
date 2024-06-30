@@ -9,7 +9,7 @@ const useResumeParser = () => {
         try {
             const config = {
                 headers: { 
-                    "Content-Type": "application/json",
+                    "Content-Type": "multipart/form-data",
                     "Authorization" : `Bearer ${token}`
                 },
                 onUploadProgress: function (progressEvent) {
@@ -17,7 +17,6 @@ const useResumeParser = () => {
                     setUploadProgess(percentCompleted);
                 }
             };
-
             const response = await axios.post("/portfolio/resume-parser", formData, config);
             return response.data;
         } catch (error) {
