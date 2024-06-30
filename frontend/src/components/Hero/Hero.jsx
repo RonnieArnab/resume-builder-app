@@ -13,19 +13,16 @@ const Hero = () => {
 
   return (
     <>
-      {/* <Navbar /> */}
-      <div className="relative bg-white pb-[110px] pt-[70px] dark:bg-dark lg:pt-[80px]">
+      <div className="relative bg-white pb-[110px] pt-[70px] dark:bg-dark lg:pt-[80px] ">
         <div className="container">
           <div className="-mx-4 flex flex-wrap">
             <div className="w-full px-4 lg:w-5/12">
               <div className="hero-content flex-col">
-                <h1 className="mb-5 text-4xl font-bold !leading-[1.208] text-dark dark:text-white sm:text-[42px] lg:text-[40px] xl:text-5xl">
-                  Kickstart Startup Website with TailGrids
+                <h1 className="mb-5 text-4xl text-center sm:text-left font-bold !leading-[1.208] text-dark dark:text-white sm:text-[42px] lg:text-[40px] xl:text-5xl">
+                AI-Powered Resume Creation & Instant Portfolio Conversion
                 </h1>
                 <p className="mb-8 max-w-[480px] text-base text-body-color dark:text-dark-6">
-                  With TailGrids, business and students thrive together.
-                  Business can perfectly match their staffing to changing demand
-                  throughout the dayed.
+                Easily create professional resumes and instantly convert them into stunning portfolios with our AI-powered tools. Simplify your job search and showcase your skills effortlessly.
                 </p>
                 <ul className="flex flex-wrap items-center">
                   <button type="button" class="text-white bg-gradient-to-r from-cyan-500 to-blue-500 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-cyan-300 dark:focus:ring-cyan-800 font-medium rounded-lg text-md px-5 py-2.5 text-center me-2 mb-2">Resume </button>

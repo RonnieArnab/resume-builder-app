@@ -89,7 +89,6 @@ module.exports = {
             if (response != "") {
                 const jsonString = response.substring(response.indexOf('{'), response.lastIndexOf('}') + 1)
                 const jsonObject = JSON.parse(jsonString);
-                console.log(jsonObject)
                 res.status(200).json({
                     status: true,
                     parsedData: jsonObject,
@@ -103,6 +102,7 @@ module.exports = {
             }
         }
         catch (e) {
+            console.log(e)
             res.status(404).json({
                 status: false,
             });

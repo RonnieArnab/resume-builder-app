@@ -9,7 +9,6 @@ const template_preview = {
 }
 function PortfolioCard({id,parsedData}) {
     const navigate = useNavigate()
-    console.log(parsedData)
     return (
         <div>
             <div className="md:w-[25rem] w-[20rem] bg-[#d5ebff]  flex flex-col justify-center items-center border-primary rounded-lg hover:scale-105 transition-all hover:shadow-md shadow-primary cursor-pointer ">

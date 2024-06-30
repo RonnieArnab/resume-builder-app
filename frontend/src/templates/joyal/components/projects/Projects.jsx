@@ -13,7 +13,7 @@ function Projects({ data }) {
             <div className="project-container conatiner-fluid center-div">
                 {data.map((project) => {
                     return (
-                        <div className="project-item row col-lg-8">
+                        <div className="project-item row  w-full md:w-4/6">
                             <div className="project-desc-right">
                                 <h3>{project.title}</h3>
                                 <p>{project.desc}</p>
