@@ -6,15 +6,15 @@ import Home from "./pages/Home/Home";
 import SignInPage from "./auth/sign-in";
 import Login from "./auth/login";
 import { useAuthContext } from "./context/AuthContext";
-import EditResume from "./pages/dashboard/resume/[resumeId]/edit";
 import { Toaster } from "./components/ui/toaster";
-import ViewResume from "./pages/dashboard/resume/[resumeId]/view";
 import Navbar from "./components/NavBar/NavBar";
 import ResumeUpload from "./pages/ResumeUpload/ResumeUpload";
 import ValidateParsedData from "./pages/ValidateParsedData/ValidateParsedData";
 import PortfolioDisplay from "./pages/PortfolioDisplay/PortfolioDisplay";
 import PageNotFound from "./pages/PageNotFound/PageNotFound";
 import DashBoard from "./pages/dashboard";
+import EditResume from "./pages/dashboard/resume/[resumeId]/edit";
+import ViewResume from "./pages/dashboard/resume/[resumeId]/view";
 
 function App() {
   const { authUser } = useAuthContext();
