@@ -4,7 +4,9 @@ import { useAuthContext } from "@/context/AuthContext";
 const useGetResume = () => {
   const { authUser } = useAuthContext();
   const { data, token } = authUser;
+
   const _id = data.user._id;
+  // console.log(data, _id);
 
   const fetchResumebyResumeId = async (resumeId) => {
     try {
@@ -17,7 +19,7 @@ const useGetResume = () => {
 
       const response = await axios.get(`/resume/${resumeId}/resumeId`, config);
 
-      console.log(response.data);
+      // console.log(response.data);
 
       return response.data;
     } catch (error) {

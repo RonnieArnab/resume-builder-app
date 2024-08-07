@@ -2,32 +2,34 @@ import React from "react";
 
 function PersonalDetailPreview({ resumeInfo }) {
   return (
-    <div className="grid grid-cols-2 items-center">
-      <div>
-        <h2 className="font-bold text-lg">
-          {resumeInfo.firstName} {resumeInfo.lastName}
-        </h2>
-        <h2 className="text-xs">{resumeInfo.email}</h2>
-        <h2>
-          <a
-            target="_blank"
-            className="text-xs font-normal"
-            href={resumeInfo.githubLink}>
-            Github
+    <div className="flex flex-col items-center">
+      <h1 className="text-2xl font-bold">
+        {resumeInfo.firstName} {resumeInfo.lastName}
+      </h1>
+      <div className="flex flex-col md:flex-row items-center space-x-2 text-xs">
+        <div className="">
+          <span>{resumeInfo.phone}</span>
+          <span> | </span>
+          <a href={`mailto:${resumeInfo.email}`} className="font-normal">
+            {resumeInfo.email}
           </a>
-        </h2>
-      </div>
-      <div className="text-right">
-        <h2 className="text-xs">Email: {resumeInfo.email}</h2>
-        <h2 className="text-xs">Mobile: {resumeInfo.phone}</h2>
-        <h2>
+          <span> | </span>
+        </div>
+        <div className="">
           <a
+            href={resumeInfo.LinkedinLink}
             target="_blank"
-            className="text-xs font-normal"
-            href={resumeInfo.LinkedinLink}>
+            className=" font-normal">
             Linkedin
           </a>
-        </h2>
+          <span> | </span>
+          <a
+            href={resumeInfo.githubLink}
+            target="_blank"
+            className=" font-normal">
+            Github
+          </a>
+        </div>
       </div>
     </div>
   );

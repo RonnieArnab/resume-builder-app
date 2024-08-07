@@ -18,6 +18,8 @@ const useFetchResume = () => {
 
       const response = await axios.get(`/resume/${_id}/userId`, config);
 
+      // console.log(response);
+
       return response.data;
     } catch (error) {
       console.error("Error:", error.message);

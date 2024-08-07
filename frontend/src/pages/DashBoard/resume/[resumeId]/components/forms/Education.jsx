@@ -36,7 +36,7 @@ function Education({ enableNext }) {
     setLoading(false);
     toast({
       title: "Details Updated",
-      description: "Personal Deatils Updated",
+      description: "Education Deatils Updated",
     });
     enableNext(true);
   };
@@ -61,6 +61,7 @@ function Education({ enableNext }) {
   };
 
   const handleRichTextEditor = (event, name, index) => {
+    console.log(index, name);
     const newEducationList = [...educationList];
     newEducationList[index][name] = event.target.value;
     setEducationList(newEducationList);
@@ -150,7 +151,7 @@ function Education({ enableNext }) {
             </div>
           ))}
         </div>
-        <div className="flex justify-between">
+        <div className="flex flex-col md:flex-row justify-between">
           <div className="flex gap-2">
             <Button
               variant="outline"

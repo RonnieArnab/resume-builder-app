@@ -29,7 +29,7 @@ function EditResume() {
     setResumeInfo(resume);
   };
 
-  console.log(resumeInfo);
+  // console.log(resumeInfo);
   return (
     <ResumeInfoContext.Provider value={{ resumeInfo, setResumeInfo }}>
       <div className="grid grid-cols-1 md:grid-cols-2 p-5 gap-10">
