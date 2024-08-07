@@ -5,7 +5,6 @@ import { Routes, Route, Navigate } from "react-router-dom";
 import Home from "./pages/Home/Home";
 import SignInPage from "./auth/sign-in";
 import Login from "./auth/login";
-import DashBoard from "./src/pages/dashboard";
 import { useAuthContext } from "./context/AuthContext";
 import EditResume from "./pages/dashboard/resume/[resumeId]/edit";
 import { Toaster } from "./components/ui/toaster";
@@ -15,6 +14,7 @@ import ResumeUpload from "./pages/ResumeUpload/ResumeUpload";
 import ValidateParsedData from "./pages/ValidateParsedData/ValidateParsedData";
 import PortfolioDisplay from "./pages/PortfolioDisplay/PortfolioDisplay";
 import PageNotFound from "./pages/PageNotFound/PageNotFound";
+import DashBoard from "./pages/dashboard";
 
 function App() {
   const { authUser } = useAuthContext();
