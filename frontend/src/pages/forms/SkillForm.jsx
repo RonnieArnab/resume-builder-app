@@ -2,7 +2,7 @@ import React, { useContext, useEffect, useState } from "react";
 import { ResumeInfoContext } from "@/context/ResumeInfoContext";
 import { useParams } from "react-router-dom";
 import useGetResume from "@/useHooks/useResume";
-import { MultiSelectInputSkills } from "../MultiSelectInput";
+import { MultiSelectInputSkills } from "../MultiSelectInput/MultiSelectInput";
 import LoadingPage from "@/components/LoadingPage/LoadingPage";
 import { Button } from "@/components/ui/button";
 import { Loader2 } from "lucide-react";

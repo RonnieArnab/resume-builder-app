@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
-import AddResume from "../AddResume";
-import ResumeCardItem from "../ResumeCardItem";
+import AddResume from "../AddResume/AddResume";
+import ResumeCardItem from "../ResumeCardItem/ResumeCardItem";
 import { useCookies } from "react-cookie";
 import Navbar from "@/components/NavBar/NavBar";
 import { useAuthContext } from "@/context/AuthContext";

@@ -1,13 +1,13 @@
 import { Button } from "@/components/ui/button";
 import { ResumeInfoContext } from "@/context/ResumeInfoContext";
 import React, { useContext, useEffect, useState } from "react";
-import RichTextEditor from "../RichTextEditor";
+import RichTextEditor from "../RichTextEditor/RichTextEditor";
 import { Input } from "@/components/ui/input";
 import useGetResume from "@/useHooks/useResume";
 import { useParams } from "react-router-dom";
 import { toast } from "@/components/ui/use-toast";
 import { Loader2 } from "lucide-react";
-import { MultiSelectInputProject } from "../MultiSelectInput";
+import { MultiSelectInputProject } from "../MultiSelectInput/MultiSelectInput";
 
 const initialFormDetails = {
   projectName: "",

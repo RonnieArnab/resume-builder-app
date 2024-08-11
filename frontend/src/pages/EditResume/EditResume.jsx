@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import FormSection from "../FormSection";
-import ResumePreview from "../ResumePreview";
+import FormSection from "../FormSection/FormSection";
+import ResumePreview from "../ResumePreview/ResumePreview";
 import { ResumeInfoContext } from "@/context/ResumeInfoContext";
 import useGetResume from "@/useHooks/useResume";
 

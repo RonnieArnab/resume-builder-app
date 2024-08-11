@@ -1,6 +1,6 @@
 import { Button } from "@/components/ui/button";
 import React, { useContext, useEffect, useState } from "react";
-import ResumePreview from "../ResumePreview";
+import ResumePreview from "../ResumePreview/ResumePreview";
 import { ResumeInfoContext } from "@/context/ResumeInfoContext";
 import useGetResume from "@/useHooks/useResume";
 import { useParams } from "react-router-dom";

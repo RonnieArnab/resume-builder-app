@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import Navbar from "../NavBar/NavBar";
 import { useAuthContext } from "@/context/AuthContext";
 import { Link, useNavigate } from "react-router-dom";
-import AddResume from "@/pages/AddResume";
+import AddResume from "@/pages/AddResume/AddResume";
 
 const Hero = () => {
   const { authUser } = useAuthContext();

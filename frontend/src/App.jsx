@@ -12,10 +12,10 @@ import ResumeUpload from "./pages/ResumeUpload/ResumeUpload";
 import ValidateParsedData from "./pages/ValidateParsedData/ValidateParsedData";
 import PortfolioDisplay from "./pages/PortfolioDisplay/PortfolioDisplay";
 import PageNotFound from "./pages/PageNotFound/PageNotFound";
-import DashBoard from "./pages/dashboard";
-import EditResume from "./pages/EditResume";
-import ViewResume from "./pages/ViewResume";
-import AddResume from "./pages/AddResume";
+import EditResume from "./pages/EditResume/EditResume";
+import ViewResume from "./pages/ViewResume/ViewResume";
+import AddResume from "./pages/AddResume/AddResume";
+import DashBoard from "./pages/dashboard/DashBoard";
 
 function App() {
   const { authUser } = useAuthContext();

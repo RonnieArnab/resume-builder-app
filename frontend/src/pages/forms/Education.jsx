@@ -2,7 +2,7 @@ import { ResumeInfoContext } from "@/context/ResumeInfoContext";
 import { Input } from "@/components/ui/input";
 import React, { useContext, useEffect, useState } from "react";
 import { Button } from "@/components/ui/button";
-import RichTextEditor from "../RichTextEditor";
+import RichTextEditor from "../RichTextEditor/RichTextEditor";
 import { toast } from "@/components/ui/use-toast";
 import useGetResume from "@/useHooks/useResume";
 import { useParams } from "react-router-dom";
