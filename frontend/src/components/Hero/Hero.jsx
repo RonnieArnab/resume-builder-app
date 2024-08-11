@@ -1,15 +1,16 @@
 import React, { useState } from "react";
 import Navbar from "../NavBar/NavBar";
 import { useAuthContext } from "@/context/AuthContext";
-import { Link,useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import AddResume from "@/pages/AddResume";
 
 const Hero = () => {
   const { authUser } = useAuthContext();
   const navigate = useNavigate();
 
   const handlePortfolioBtn = () => {
-    navigate('/portfolio/create')
-  }
+    navigate("/portfolio/create");
+  };
 
   return (
     <>
@@ -19,15 +20,27 @@ const Hero = () => {
             <div className="w-full px-4 lg:w-5/12">
               <div className="hero-content flex-col">
                 <h1 className="mb-5 text-4xl text-center sm:text-left font-bold !leading-[1.208] text-dark dark:text-white sm:text-[42px] lg:text-[40px] xl:text-5xl">
-                AI-Powered Resume Creation & Instant Portfolio Conversion
+                  AI-Powered Resume Creation & Instant Portfolio Conversion
                 </h1>
                 <p className="mb-8 max-w-[480px] text-base text-body-color dark:text-dark-6">
-                Easily create professional resumes and instantly convert them into stunning portfolios with our AI-powered tools. Simplify your job search and showcase your skills effortlessly.
+                  Easily create professional resumes and instantly convert them
+                  into stunning portfolios with our AI-powered tools. Simplify
+                  your job search and showcase your skills effortlessly.
                 </p>
                 <ul className="flex flex-wrap items-center">
-                  <button type="button" class="text-white bg-gradient-to-r from-cyan-500 to-blue-500 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-cyan-300 dark:focus:ring-cyan-800 font-medium rounded-lg text-md px-5 py-2.5 text-center me-2 mb-2">Resume </button>
-                  <button type="button" onClick={handlePortfolioBtn} class="text-white bg-gradient-to-br from-green-400 to-blue-600 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-green-200 dark:focus:ring-green-800 font-medium rounded-lg text-md px-5 py-2.5 text-center me-2 mb-2">Portfolio</button>
-
+                  <AddResume />
+                  {/* <button
+                    type="button"
+                    onClick={handleResumeBtn}
+                    class="text-white bg-gradient-to-r from-cyan-500 to-blue-500 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-cyan-300 dark:focus:ring-cyan-800 font-medium rounded-lg text-md px-5 py-2.5 text-center me-2 mb-2">
+                    Resume{" "}
+                  </button> */}
+                  <button
+                    type="button"
+                    onClick={handlePortfolioBtn}
+                    class="text-white bg-gradient-to-br from-green-400 to-blue-600 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-green-200 dark:focus:ring-green-800 font-medium rounded-lg text-md px-5 py-2.5 text-center me-2 mb-2">
+                    Portfolio
+                  </button>
                 </ul>
                 {/* <div className="clients pt-16">
                   <h6 className="mb-6 flex items-center text-xs font-normal text-body-color dark:text-dark-6">
@@ -69,8 +82,7 @@ const Hero = () => {
                       height="93"
                       viewBox="0 0 93 93"
                       fill="none"
-                      xmlns="http://www.w3.org/2000/svg"
-                    >
+                      xmlns="http://www.w3.org/2000/svg">
                       <circle cx="2.5" cy="2.5" r="2.5" fill="#3056D3" />
                       <circle cx="2.5" cy="24.5" r="2.5" fill="#3056D3" />
                       <circle cx="2.5" cy="46.5" r="2.5" fill="#3056D3" />
@@ -119,4 +131,3 @@ const SingleImage = ({ href, imgSrc }) => {
     </>
   );
 };
-

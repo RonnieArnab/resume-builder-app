@@ -48,7 +48,9 @@ function Education({ enableNext }) {
   const handleChange = (event, index) => {
     const { name, value } = event.target;
     const newEducationList = [...educationList];
-    newEducationList[index][name] = value;
+    if (name == "startDate" || name == "endDate") {
+      newEducationList[index][name] = value.substring(0, 4);
+    } else newEducationList[index][name] = value;
     setEducationList(newEducationList);
   };
 
@@ -117,26 +119,50 @@ function Education({ enableNext }) {
                 />
               </div>
               <div className="">
-                <label className=" text-xs ">End State</label>
-                <Input
-                  type="date"
-                  name="endState"
-                  defaultValue={education.endDate}
-                  value={education.endDate}
-                  onChange={(event) => handleChange(event, index)}
-                  className="w-full p-2 border rounded"
-                />
-              </div>
-              <div className="">
                 <label className=" text-xs ">Start Date</label>
                 <Input
+                  type="number"
+                  placeholder="YYYY"
+                  name="startDate"
+                  defaultValue={education.startDate}
+                  value={education.startDate}
+                  onChange={(event) => handleChange(event, index)}
+                  className="w-full p-2 border rounded"
+                  min="1900"
+                  max="9999"
+                />
+                {/* <Input
                   type="date"
                   name="startDate"
                   defaultValue={education.startDate}
                   value={education.startDate}
                   onChange={(event) => handleChange(event, index)}
                   className="w-full p-2 border rounded"
+                /> */}
+              </div>
+              <div className="">
+                <label className=" text-xs ">End State</label>
+                <Input
+                  type="number"
+                  placeholder="YYYY"
+                  name="endDate"
+                  defaultValue={education.endDate}
+                  value={education.endDate}
+                  onChange={(event) => handleChange(event, index)}
+                  className="w-full p-2 border rounded"
+                  min="1900"
+                  max="9999"
                 />
+                {/* <Input
+                  type="date"
+                  name="endDate"
+                  defaultValue={education.endDate}
+                  value={education.endDate}
+                  onChange={(event) => handleChange(event, index)}
+                  className="w-full p-2 border rounded"
+                  min="1900"
+                  max="9999"
+                /> */}
               </div>
               <div className="col-span-2">
                 <label className=" text-xs ">Description</label>
@@ -157,7 +183,7 @@ function Education({ enableNext }) {
               variant="outline"
               className="text-primary"
               onClick={AddNewEducation}>
-              + Add More Experience
+              + Add More Education
             </Button>
             <Button
               variant="outline"

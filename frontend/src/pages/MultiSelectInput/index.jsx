@@ -103,7 +103,7 @@ function MultiSelectInputSkills({
   fieldKey,
   label,
 }) {
-  // console.log(content, fieldKey, label);
+  console.log(content, fieldKey, label);
 
   // contentList[fieldKey].map((item) => console.log(item));
   const [input, setInput] = useState("");

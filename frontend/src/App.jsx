@@ -13,14 +13,15 @@ import ValidateParsedData from "./pages/ValidateParsedData/ValidateParsedData";
 import PortfolioDisplay from "./pages/PortfolioDisplay/PortfolioDisplay";
 import PageNotFound from "./pages/PageNotFound/PageNotFound";
 import DashBoard from "./pages/dashboard";
-import EditResume from "./pages/dashboard/resume/[resumeId]/edit";
-import ViewResume from "./pages/dashboard/resume/[resumeId]/view";
+import EditResume from "./pages/EditResume";
+import ViewResume from "./pages/ViewResume";
+import AddResume from "./pages/AddResume";
 
 function App() {
   const { authUser } = useAuthContext();
 
   return (
-    <div className="min-h-screen">
+    <div className="min-h-screen pb-4">
       {authUser == undefined || authUser == null || authUser == "" ? (
         <Routes>
           <Route path="/" element={<Home />} />
@@ -46,8 +47,6 @@ function App() {
               path="edit/:portfolioId"
               element={<ValidateParsedData reqType={"edit"} />}
             />
-            <Route path="resume/:resumeId/edit" element={<EditResume />} />
-            <Route path="resume/:resumeId/view" element={<ViewResume />} />
           </Route>
           <Route path="/portfolio">
             <Route path="create" element={<ResumeUpload />} />
@@ -55,6 +54,10 @@ function App() {
               path="validate"
               element={<ValidateParsedData reqType={"validate"} />}
             />
+          </Route>
+          <Route path="/resume">
+            <Route path=":resumeId/edit" element={<EditResume />} />
+            <Route path=":resumeId/view" element={<ViewResume />} />
           </Route>
           <Route path="/:portfolioId" element={<PortfolioDisplay />} />
           <Route path="*" element={<PageNotFound />} />

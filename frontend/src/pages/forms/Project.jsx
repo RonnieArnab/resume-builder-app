@@ -36,7 +36,7 @@ function Project({ enableNext }) {
     setLoading(false);
     toast({
       title: "Details Updated",
-      description: "Personal Details Updated",
+      description: "Project Details Updated",
     });
     enableNext(true);
   };

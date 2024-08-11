@@ -84,7 +84,7 @@ function PersonalForm({ enableNext }) {
             />
           </div>
           <div className="">
-            <label className="text-sm">Linked</label>
+            <label className="text-sm">LinkedIn</label>
             <Input
               name="LinkedinLink"
               required

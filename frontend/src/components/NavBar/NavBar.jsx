@@ -2,8 +2,7 @@ import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useAuthContext } from "@/context/AuthContext";
 import { useCookies } from "react-cookie";
-import './NavBar.css'
-
+import "./NavBar.css";
 
 const Navbar = () => {
   const [open, setOpen] = useState(false);
@@ -18,10 +17,10 @@ const Navbar = () => {
   };
 
   const handleMobileNavBtn = () => {
-    console.log("hello")
+    console.log("hello");
     var element = document.getElementById("nav-box");
     element.classList.toggle("mobile-nav-display");
-  }
+  };
 
   // const [screenWidth, setScreenWidth] = useState(window.innerWidth);
 
@@ -30,16 +29,17 @@ const Navbar = () => {
       var element = document.getElementById("nav-box");
       element.classList.add("mobile-nav-display");
     };
-    window.addEventListener('resize', handleResize);
+    window.addEventListener("resize", handleResize);
     handleResize();
 
     return () => {
-      window.removeEventListener('resize', handleResize);
+      window.removeEventListener("resize", handleResize);
     };
   }, []);
 
   return (
     <div
+      id="topnav"
       class="pt-4 mb-1 border-b-default border-solid border-gray-200 z-30 w-full bg-white ">
       <div class="mx-auto max-w-7xl  lg:px-8">
         <div class="w-full flex flex-col lg:flex-row">
@@ -51,7 +51,6 @@ const Navbar = () => {
                 viewBox="0 0 40 33"
                 fill="none"
                 xmlns="http://www.w3.org/2000/svg">
-
                 <path
                   d="M24.5473 11.8941C25.1905 12.5063 25.2068 13.5149 24.5837 14.1468L18.7585 20.054C18.1354 20.686 17.1087 20.702 16.4654 20.0898C15.8222 19.4776 15.8059 18.469 16.429 17.8371L22.2542 11.9299C22.8773 11.2979 23.904 11.2819 24.5473 11.8941Z"
                   fill="url(#paint0_linear_6727_44729)"></path>
@@ -84,10 +83,19 @@ const Navbar = () => {
                 </defs>
               </svg>
               <svg width="100" height="50" xmlns="http://www.w3.org/2000/svg">
-                <text x="0" y="35" font-family="Arial, sans-serif" font-weight="600" font-size="24px" fill="#000">Resumit</text>
+                <text
+                  x="0"
+                  y="35"
+                  font-family="Arial, sans-serif"
+                  font-weight="600"
+                  font-size="24px"
+                  fill="#000">
+                  Resumit
+                </text>
               </svg>
             </a>
-            <button onClick={handleMobileNavBtn}
+            <button
+              onClick={handleMobileNavBtn}
               type="button"
               class="inline-flex items-center p-2 ml-3 text-sm text-gray-500 rounded-lg lg:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200">
               <svg
@@ -103,8 +111,9 @@ const Navbar = () => {
               </svg>
             </button>
 
-
-            <div className="absolute mobile-nav-display bg-white top-16 shadow-2xl right-11 w-2/5 z-10 p-2 rounded-lg" id="nav-box">
+            <div
+              className="absolute mobile-nav-display bg-white top-16 shadow-2xl right-11 w-2/5 z-10 p-2 rounded-lg"
+              id="nav-box">
               <ul class="flex lg:items-center max-lg:gap-4 max-lg:mb-4 !pl-0 flex-col mt-2 md:mt-0 lg:flex-row">
                 <li className="flex justify-center">
                   <a
@@ -158,9 +167,6 @@ const Navbar = () => {
                 )}
               </div>
             </div>
-
-
-
           </div>
           <div
             class="hidden w-full lg:flex justify-between max-lg:bg-white max-lg:mt-1 max-lg:px-4 max-lg:shadow-lg max-lg:shadow-gray-200 max-lg:h-auto max-lg:overflow-auto transition-all duration-500 delay-200 "
@@ -180,7 +186,7 @@ const Navbar = () => {
                   clip-rule="evenodd"
                   d="M0 4.54673C0 2.03564 2.07211 0 4.62819 0H21.5399V0.00124069C28.9908 0.0998525 35 6.06429 35 13.4075C35 20.8123 28.8897 26.8151 21.3523 26.8151C18.6648 26.8151 16.1587 26.052 14.0463 24.7342L6.58815 31.9057C4.13431 34.2652 0 32.5573 0 29.1841V4.54673ZM11.5194 22.7055C9.15709 20.295 7.70452 17.0179 7.70452 13.4075C7.70452 12.5277 8.43056 11.8144 9.32619 11.8144C10.2218 11.8144 10.9479 12.5277 10.9479 13.4075C10.9479 19.0526 15.6061 23.6288 21.3523 23.6288C27.0985 23.6288 31.7567 19.0526 31.7567 13.4075C31.7567 7.76248 27.0985 3.18626 21.3523 3.18626H4.62819C3.86336 3.18626 3.24334 3.79536 3.24334 4.54673V29.1841C3.24334 29.7351 3.91866 30.014 4.31948 29.6286L11.5194 22.7055Z"
                   fill="url(#paint1_linear_6759_45513)"></path>
-                  
+
                 <defs>
                   <linearGradient
                     id="paint0_linear_6759_45513"
@@ -205,12 +211,22 @@ const Navbar = () => {
                 </defs>
               </svg>
               <svg width="100" height="50" xmlns="http://www.w3.org/2000/svg">
-                <text x="0" y="35" font-family="Arial, sans-serif" font-weight="600" font-size="24" fill="#000">Resumit</text>
+                <text
+                  x="0"
+                  y="35"
+                  font-family="Arial, sans-serif"
+                  font-weight="600"
+                  font-size="24"
+                  fill="#000">
+                  Resumit
+                </text>
               </svg>
             </a>
 
             <div className="md:flex " id="nav-box">
-              <ul id="currentModal" class="flex lg:items-center max-lg:gap-4 max-lg:mb-4 flex-col mt-2 md:mt-0 lg:flex-row">
+              <ul
+                id="currentModal"
+                class="flex lg:items-center max-lg:gap-4 max-lg:mb-4 flex-col mt-2 md:mt-0 lg:flex-row">
                 <li className="flex justify-center">
                   <a
                     href="/"
@@ -285,8 +301,6 @@ const ListItem = ({ children, NavLink }) => {
     </>
   );
 };
-
-
 
 // import { useAuthContext } from '@/context/AuthContext';
 // import React, { useState } from 'react'

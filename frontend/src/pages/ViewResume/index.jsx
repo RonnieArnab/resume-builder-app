@@ -1,6 +1,6 @@
 import { Button } from "@/components/ui/button";
 import React, { useContext, useEffect, useState } from "react";
-import ResumePreview from "../components/ResumePreview";
+import ResumePreview from "../ResumePreview";
 import { ResumeInfoContext } from "@/context/ResumeInfoContext";
 import useGetResume from "@/useHooks/useResume";
 import { useParams } from "react-router-dom";
@@ -47,7 +47,10 @@ function ViewResume() {
             <Button>Share</Button>
           </div>
         </div>
-        <div id="" ref={targetRef} className="my-10 mx-10 lg:mx-36 md:mx-20">
+        <div
+          id="print-area-parent"
+          ref={targetRef}
+          className="my-10 mx-10 lg:mx-36 md:mx-20">
           <div id="print-area">
             <ResumePreview />
           </div>
